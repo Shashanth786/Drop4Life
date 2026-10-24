@@ -1,0 +1,138 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* ===========================
+        NAVBAR
+=========================== */
+
+.drop-navbar{
+    height:70px;
+    background:#fff;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:10px 60px 0;
+    box-shadow:0 2px 10px rgba(0,0,0,.08);
+    position:sticky;
+    top:0;
+    z-index:1000;
+    font-family:'Poppins',sans-serif;
+}
+
+/* Logo */
+
+.drop-logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:30px;
+    font-weight:700;
+    margin-right:20px;
+}
+
+.drop-logo i{
+    color:#e60000;
+    font-size:32px;
+}
+
+.drop-four{
+    color:#e60000;
+}
+
+/* Navigation Links */
+
+.drop-nav-links{
+    display:flex;
+    list-style:none;
+    gap:40px;
+    margin:0;
+    padding:0;
+}
+
+.drop-nav-links li{
+    list-style:none;
+}
+
+.drop-nav-links a{
+    text-decoration:none;
+    color:#333;
+    font-size:20px;
+    font-weight:500;
+    position:relative;
+    transition:.3s;
+}
+
+.drop-nav-links a:hover{
+    color:#e60000;
+}
+
+.drop-nav-links a::after{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:-8px;
+    width:0;
+    height:3px;
+    background:#e60000;
+    transition:.4s;
+}
+
+.drop-nav-links a:hover::after{
+    width:100%;
+}
+
+.drop-active{
+    color:#e60000 !important;
+}
+
+.drop-active::after{
+    width:100%;
+}
+
+/* Right Side */
+
+.drop-nav-right{
+    display:flex;
+    gap:15px;
+}
+
+/* Login Button */
+
+.drop-login-btn{
+    padding:10px 16px;
+    border:2px solid #e60000;
+    background:#fff;
+    color:#e60000;
+    border-radius:8px;
+    cursor:pointer;
+    transition:.3s;
+    font-family:'Poppins',sans-serif;
+    font-size:13px;
+}
+
+.drop-login-btn:hover{
+    background:#e60000;
+    color:#fff;
+    transform:translateY(-3px);
+}
+
+/* Signup Button */
+
+.drop-signup-btn{
+    padding:10px 16px;
+    border:none;
+    background:#e60000;
+    color:#fff;
+    border-radius:8px;
+    cursor:pointer;
+    transition:.3s;
+    font-family:'Poppins',sans-serif;
+    font-size:13px;
+}
+
+.drop-signup-btn:hover{
+    transform:translateY(-3px);
+    box-shadow:0 8px 20px rgba(229,57,53,.3);
+    background:#fff;
+    color:#000;
+    border:2px solid #000;
+}

@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile | Drop4Life</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet" href="../CSS/profile.css">
+
+    <style>
+        .profile-message {
+            display: none;
+            margin: 0 0 18px;
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .profile-message.show {
+            display: block;
+        }
+
+        .profile-message[data-type="error"] {
+            background: #fff0f0;
+            color: #a61b1b;
+            border: 1px solid #f3c4c4;
+        }
+
+        .profile-message[data-type="success"] {
+            background: #edfaf1;
+            color: #176c35;
+            border: 1px solid #cdeed7;
+        }
+
+        .profile-message[data-type="info"] {
+            background: #f0f5ff;
+            color: #244b88;
+            border: 1px solid #d5e2fb;
+        }
+
+        .profile-shortcuts {
+            margin-top: 24px;
+            padding-top: 22px;
+            border-top: 1px solid #eee;
+        }
+
+        .profile-shortcuts h3 {
+            margin: 0 0 14px;
+            font-size: 17px;
+        }
+
+        .shortcut-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .shortcut-btn {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            gap: 9px;
+            padding: 12px 16px;
+            border: 0;
+            border-radius: 8px;
+            text-decoration: none;
+            cursor: pointer;
+            font: 600 13px 'Poppins', sans-serif;
+            color: #fff;
+            background: #d90429;
+        }
+
+        .shortcut-btn.secondary {
+            background: #343a40;
+        }
+
+        .shortcut-btn:disabled {
+            opacity: .65;
+            cursor: not-allowed;
+        }
+
+        .my-requests-panel {
+            margin-top: 18px;
+            padding: 18px;
+            border: 1px solid #eee;
+            border-radius: 12px;
+            background: #fcfcfc;
+        }
+
+        .my-requests-panel[hidden] {
+            display: none;
+        }
+
+        .my-requests-panel h3 {
+            margin: 0 0 6px;
+            font-size: 17px;
+        }
+
+        .my-requests-intro {
+            margin: 0 0 14px;
+            color: #777;
+            font-size: 13px;
+        }
+
+        .owned-request-list {
+            display: grid;
+            gap: 12px;
+        }
+
+        .owned-request-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            padding: 14px;
+            border: 1px solid #eee;
+            border-radius: 10px;
+            background: #fff;
+        }
+
+        .owned-request-card h4 {
+            margin: 0 0 5px;
+            font-size: 14px;
+        }
+
+        .owned-request-card p {
+            margin: 3px 0;
+            color: #666;
+            font-size: 12px;
+        }
+
+        .owned-request-card .shortcut-btn {
+            white-space: nowrap;
+        }
+
+        .request-list-message {
+            color: #666;
+            font-size: 13px;
+        }
+
+        .modal-box form {
+            margin: 0;
+        }
+
+        @media (max-width: 640px) {
+            .shortcut-buttons {
+                flex-direction: column;
+            }
+
+            .shortcut-btn {
+                width: 100%;
+            }
+
+            .owned-request-card {
+                align-items: stretch;
+                flex-direction: column;
+            }
+
+            .owned-request-card .shortcut-btn {
+                width: 100%;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="../CSS/responsive.css">
+    <script src="../JS/mobile-nav.js" defer></script>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="profile-navbar">
+        <div class="profile-logo">
+            <i class="fa-solid fa-droplet"></i>
+            <span>Drop<span>4</span>Life</span>
+        </div>
+
+        <a id="dashboardLink" href="a.jsp" class="dashboard-link">
+            <i class="fa-solid fa-arrow-left"></i>
+            Dashboard
+        </a>
+    </nav>
+
+    <!-- Main Profile -->
+    <main class="profile-container">
+
+        <div class="profile-heading">
+            <span class="profile-tag">
+                <i class="fa-solid fa-user"></i>
+                MY ACCOUNT
+            </span>
+
+            <h1>My <span>Profile</span></h1>
+
+            <p>View and manage your Drop4Life account details.</p>
+        </div>
+
+        <div id="profileMessage"
+             class="profile-message"
+             role="status"
+             aria-live="polite"></div>
+
+        <div class="profile-card">
+
+            <!-- Account Header -->
+            <div class="account-header">
+                <div class="account-icon">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+
+                <div>
+                    <h2 id="displayName">Loading profile...</h2>
+                    <p>Drop4Life Member</p>
+                </div>
+            </div>
+
+            <!-- Personal Information -->
+            <div class="section-title">
+                <i class="fa-solid fa-id-card"></i>
+                Personal Information
+            </div>
+
+            <div class="details-grid">
+
+                <div class="detail-box">
+                    <span>Full Name</span>
+                    <strong id="profileName">Loading...</strong>
+                </div>
+
+                <div class="detail-box">
+                    <span>Email Address</span>
+                    <strong id="profileEmail">Loading...</strong>
+                </div>
+
+                <div class="detail-box">
+                    <span>Mobile Number</span>
+                    <strong id="profileMobile">Loading...</strong>
+                </div>
+
+                <div class="detail-box">
+                    <span>Blood Group</span>
+                    <strong class="blood-group"
+                            id="profileBloodGroup">Loading...</strong>
+                </div>
+
+                <div class="detail-box full-width">
+                    <span>Member ID</span>
+                    <strong id="profileUserId">Loading...</strong>
+                </div>
+
+            </div>
+
+            <!-- Profile Actions -->
+            <div class="profile-actions">
+
+                <button type="button"
+                        class="edit-btn"
+                        onclick="openEditProfile()">
+                    <i class="fa-solid fa-pen"></i>
+                    Edit Profile
+                </button>
+
+                <button type="button"
+                        class="logout-btn"
+                        onclick="logoutUser()">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    Logout
+                </button>
+
+            </div>
+
+            <!-- Quick Access -->
+            <section class="profile-shortcuts"
+                     aria-labelledby="shortcutHeading">
+
+                <h3 id="shortcutHeading">Quick Access</h3>
+
+                <div class="shortcut-buttons">
+
+                    <button type="button"
+                            class="shortcut-btn secondary"
+                            id="bloodRequestsBtn">
+                        <i class="fa-solid fa-hand-holding-droplet"></i>
+                        Blood Requests
+                    </button>
+
+                    <button type="button"
+                            class="shortcut-btn"
+                            id="donorAvailabilityBtn"
+                            aria-expanded="false"
+                            aria-controls="myRequestsPanel">
+                        <i class="fa-solid fa-users"></i>
+                        Donor Availability
+                    </button>
+
+                </div>
+
+                <div id="myRequestsPanel"
+                     class="my-requests-panel"
+                     hidden>
+
+                    <h3>Your submitted blood requests</h3>
+
+                    <p class="my-requests-intro">
+                        Choose a request to view donors matching its
+                        blood group and city.
+                    </p>
+
+                    <div id="myRequestsList"
+                         class="owned-request-list">
+                        <p class="request-list-message">
+                            Loading your blood requests...
+                        </p>
+                    </div>
+
+                </div>
+
+            </section>
+
+        </div>
+    </main>
+    
+        <!-- Edit Profile Modal -->
+    <div class="modal-overlay"
+         id="editProfileModal"
+         aria-hidden="true">
+
+        <div class="modal-box"
+             role="dialog"
+             aria-modal="true"
+             aria-labelledby="editProfileTitle">
+
+            <div class="modal-header">
+                <div>
+                    <h2 id="editProfileTitle">Edit Profile</h2>
+                    <p>Update your personal information.</p>
+                </div>
+
+                <button type="button"
+                        class="close-btn"
+                        aria-label="Close edit profile"
+                        onclick="closeEditProfile()">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <form id="editProfileForm"
+                  onsubmit="event.preventDefault(); saveProfile();">
+
+                <div class="form-group">
+                    <label for="editName">Full Name</label>
+
+                    <div class="input-box">
+                        <i class="fa-solid fa-user"></i>
+                        <input type="text"
+                               id="editName"
+                               maxlength="100"
+                               required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="editEmail">Email Address</label>
+
+                    <div class="input-box">
+                        <i class="fa-solid fa-envelope"></i>
+                        <input type="email"
+                               id="editEmail"
+                               maxlength="150"
+                               required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="editMobile">Mobile Number</label>
+
+                    <div class="input-box">
+                        <i class="fa-solid fa-phone"></i>
+                        <input type="tel"
+                               id="editMobile"
+                               maxlength="20"
+                               required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="editBloodGroup">Blood Group</label>
+
+                    <div class="input-box">
+                        <i class="fa-solid fa-droplet"></i>
+                        <input type="text"
+                               id="editBloodGroup"
+                               readonly>
+                    </div>
+
+                    <small>Blood group cannot be changed here.</small>
+                </div>
+
+                <div class="modal-actions">
+
+                    <button type="button"
+                            class="cancel-btn"
+                            onclick="closeEditProfile()">
+                        Cancel
+                    </button>
+
+                    <button type="submit"
+                            class="save-btn"
+                            id="saveProfileBtn">
+                        <i class="fa-solid fa-check"></i>
+                        Save Changes
+                    </button>
+
+                </div>
+
+            </form>
+        </div>
+    </div>
+    
+        <script>
+        // Get application context path dynamically
+        const contextPath = (() => {
+            const marker = "/HTML/";
+            const currentPath = window.location.pathname;
+            const markerIndex = currentPath.indexOf(marker);
+
+            return markerIndex >= 0
+                ? currentPath.substring(0, markerIndex)
+                : "";
+        })();
+
+        let currentProfile = null;
+        let requestsLoaded = false;
+
+        document.getElementById("dashboardLink").href =
+            contextPath + "/HTML/a.jsp";
+
+        document.addEventListener("DOMContentLoaded", () => {
+
+            loadProfile();
+
+            document.getElementById("bloodRequestsBtn")
+                .addEventListener("click", () => {
+                    window.location.href =
+                        contextPath + "/HTML/recipients.html";
+                });
+
+            document.getElementById("donorAvailabilityBtn")
+                .addEventListener("click", toggleMyBloodRequests);
+        });
+
+        // Display a message to the user
+        function showProfileMessage(message, type = "info") {
+            const element =
+                document.getElementById("profileMessage");
+
+            element.textContent = message;
+            element.dataset.type = type;
+            element.classList.add("show");
+        }
+
+        function clearProfileMessage() {
+            const element =
+                document.getElementById("profileMessage");
+
+            element.textContent = "";
+            element.classList.remove("show");
+        }
+
+        // Safely read JSON responses
+        async function readResponse(response) {
+            const text = await response.text();
+
+            if (!text) {
+                return {};
+            }
+
+            try {
+                return JSON.parse(text);
+            } catch (_) {
+                return { message: text };
+            }
+        }
+
+        // Load the currently logged-in user's profile
+        async function loadProfile() {
+            try {
+                const response = await fetch(
+                    contextPath + "/api/profile",
+                    {
+                        method: "GET",
+                        credentials: "same-origin",
+                        headers: {
+                            "Accept": "application/json"
+                        }
+                    }
+                );
+
+                if (response.status === 401) {
+                    window.location.href =
+                        contextPath + "/login.html";
+                    return;
+                }
+
+                const data = await readResponse(response);
+
+                if (!response.ok) {
+                    throw new Error(
+                        data.detail ||
+                        data.message ||
+                        "Unable to load your profile."
+                    );
+                }
+
+                currentProfile = data;
+                renderProfile(data);
+                clearProfileMessage();
+
+            } catch (error) {
+                console.error("Error loading profile:", error);
+
+                showProfileMessage(
+                    error.message ||
+                    "Unable to load your profile. Please try again.",
+                    "error"
+                );
+            }
+        }
+
+        // Display database information on the page
+        function renderProfile(profile) {
+            const name = profile.fullName || "Name not provided";
+
+            document.getElementById("displayName").textContent = name;
+            document.getElementById("profileName").textContent = name;
+
+            document.getElementById("profileEmail").textContent =
+                profile.email || "Email not provided";
+
+            document.getElementById("profileMobile").textContent =
+                profile.phone || "Phone not provided";
+
+            document.getElementById("profileBloodGroup").textContent =
+                profile.bloodGroup || "Not provided";
+
+            document.getElementById("profileUserId").textContent =
+                profile.userId ?? "Not available";
+
+            document.getElementById("editName").value =
+                profile.fullName || "";
+
+            document.getElementById("editEmail").value =
+                profile.email || "";
+
+            document.getElementById("editMobile").value =
+                profile.phone || "";
+
+            document.getElementById("editBloodGroup").value =
+                profile.bloodGroup || "Not provided";
+        }
+
+        function openEditProfile() {
+            if (!currentProfile) {
+                showProfileMessage(
+                    "Your profile is still loading. Please wait.",
+                    "info"
+                );
+                return;
+            }
+
+            clearProfileMessage();
+            renderProfile(currentProfile);
+
+            const modal =
+                document.getElementById("editProfileModal");
+
+            modal.classList.add("show");
+            modal.setAttribute("aria-hidden", "false");
+        }
+
+        function closeEditProfile() {
+            const modal =
+                document.getElementById("editProfileModal");
+
+            modal.classList.remove("show");
+            modal.setAttribute("aria-hidden", "true");
+        }
+
+        // Save name, email and phone to the database
+        async function saveProfile() {
+            const form =
+                document.getElementById("editProfileForm");
+
+            if (!form.reportValidity()) {
+                return;
+            }
+
+            const fullName =
+                document.getElementById("editName").value.trim();
+
+            const email =
+                document.getElementById("editEmail").value.trim();
+
+            const phone =
+                document.getElementById("editMobile").value.trim();
+
+            const saveButton =
+                document.getElementById("saveProfileBtn");
+
+            if (!fullName || !email || !phone) {
+                showProfileMessage(
+                    "Name, email and phone number are required.",
+                    "error"
+                );
+                return;
+            }
+
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                showProfileMessage(
+                    "Please enter a valid email address.",
+                    "error"
+                );
+                return;
+            }
+
+            saveButton.disabled = true;
+            saveButton.textContent = "Saving...";
+
+            try {
+                const response = await fetch(
+                    contextPath + "/api/profile/update",
+                    {
+                        method: "POST",
+                        credentials: "same-origin",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Accept": "application/json"
+                        },
+                        body: JSON.stringify({
+                            fullName: fullName,
+                            email: email,
+                            phone: phone
+                        })
+                    }
+                );
+
+                const data = await readResponse(response);
+
+                if (response.status === 401) {
+                    window.location.href =
+                        contextPath + "/login.html";
+                    return;
+                }
+
+                if (!response.ok) {
+                    throw new Error(
+                        data.detail ||
+                        data.message ||
+                        "Could not save your profile."
+                    );
+                }
+
+                currentProfile = data;
+                renderProfile(data);
+                closeEditProfile();
+
+                showProfileMessage(
+                    data.message || "Profile updated successfully.",
+                    "success"
+                );
+
+            } catch (error) {
+                console.error("Error saving profile:", error);
+
+                showProfileMessage(
+                    error.message ||
+                    "Could not save your profile. Please try again.",
+                    "error"
+                );
+
+            } finally {
+                saveButton.disabled = false;
+                saveButton.innerHTML =
+                    '<i class="fa-solid fa-check"></i> Save Changes';
+            }
+        }
+
+        // Open or close the user's submitted blood requests
+        async function toggleMyBloodRequests() {
+            const panel =
+                document.getElementById("myRequestsPanel");
+
+            const button =
+                document.getElementById("donorAvailabilityBtn");
+
+            if (!panel.hidden) {
+                panel.hidden = true;
+                button.setAttribute("aria-expanded", "false");
+                return;
+            }
+
+            panel.hidden = false;
+            button.setAttribute("aria-expanded", "true");
+
+            if (!requestsLoaded) {
+                await loadMyBloodRequests();
+            }
+        }
+
+        // Fetch requests submitted by the current user
+        async function loadMyBloodRequests() {
+            const list =
+                document.getElementById("myRequestsList");
+
+            list.replaceChildren();
+
+            const loading = document.createElement("p");
+            loading.className = "request-list-message";
+            loading.textContent = "Loading your blood requests...";
+
+            list.append(loading);
+
+            try {
+                const response = await fetch(
+                    contextPath + "/api/myBloodRequests",
+                    {
+                        method: "GET",
+                        credentials: "same-origin",
+                        headers: {
+                            "Accept": "application/json"
+                        }
+                    }
+                );
+
+                if (response.status === 401) {
+                    window.location.href =
+                        contextPath + "/login.html";
+                    return;
+                }
+
+                const data = await readResponse(response);
+
+                if (!response.ok) {
+                    throw new Error(
+                        data.detail ||
+                        data.message ||
+                        "Unable to load your blood requests."
+                    );
+                }
+
+                list.replaceChildren();
+
+                if (!Array.isArray(data) || data.length === 0) {
+                    const empty = document.createElement("p");
+
+                    empty.className = "request-list-message";
+                    empty.textContent =
+                        "You haven't submitted any blood requests yet. " +
+                        "Submit a request from the dashboard to find " +
+                        "matching donors here.";
+
+                    list.append(empty);
+                    requestsLoaded = true;
+                    return;
+                }
+
+                data.forEach(request => {
+                    const card = document.createElement("article");
+                    card.className = "owned-request-card";
+
+                    const details = document.createElement("div");
+
+                    const title = document.createElement("h4");
+                    title.textContent =
+                        request.patientName || "Blood request";
+
+                    const bloodCity = document.createElement("p");
+                    bloodCity.textContent =
+                        "Blood group: " +
+                        (request.bloodGroup || "N/A") +
+                        " · City: " +
+                        (request.city || "Not provided");
+
+                    const hospital = document.createElement("p");
+                    hospital.textContent =
+                        "Hospital: " +
+                        (request.hospitalName || "Not provided");
+
+                    details.append(title, bloodCity, hospital);
+
+                    const viewButton = document.createElement("a");
+
+                    viewButton.className = "shortcut-btn";
+                    viewButton.href =
+                        contextPath +
+                        "/HTML/donors.html?requestId=" +
+                        encodeURIComponent(request.requestId);
+
+                    viewButton.innerHTML =
+                        '<i class="fa-solid fa-users"></i> ' +
+                        'View Matching Donors';
+
+                    card.append(details, viewButton);
+                    list.append(card);
+                });
+
+                requestsLoaded = true;
+
+            } catch (error) {
+                console.error(
+                    "Error loading user's requests:",
+                    error
+                );
+
+                list.replaceChildren();
+
+                const errorMessage = document.createElement("p");
+                errorMessage.className = "request-list-message";
+
+                errorMessage.textContent =
+                    error.message ||
+                    "Unable to load your requests. Please try again.";
+
+                list.append(errorMessage);
+            }
+        }
+
+        // Log out and invalidate the server session
+        async function logoutUser() {
+            try {
+                const response = await fetch(
+                    contextPath + "/api/logout",
+                    {
+                        method: "POST",
+                        credentials: "same-origin",
+                        headers: {
+                            "Accept": "application/json"
+                        }
+                    }
+                );
+
+                if (!response.ok) {
+                    console.error("Logout request failed.");
+                }
+
+            } catch (error) {
+                console.error("Logout request failed:", error);
+
+            } finally {
+                window.location.href =
+                    contextPath + "/login.html";
+            }
+        }
+
+        // Close the edit modal when clicking outside
+        window.addEventListener("click", function (event) {
+            const modal =
+                document.getElementById("editProfileModal");
+
+            if (event.target === modal) {
+                closeEditProfile();
+            }
+        });
+
+        // Close the edit modal with Escape
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "Escape") {
+                closeEditProfile();
+            }
+        });
+    </script>
+
+</body>
+</html>

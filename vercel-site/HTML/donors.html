@@ -1,0 +1,184 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donor Availability | Drop4Life</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet" href="../CSS/donors.css">
+    <link rel="stylesheet" href="../CSS/responsive.css">
+    <script src="../JS/mobile-nav.js" defer></script>
+</head>
+
+<body>
+
+<nav class="result-navbar">
+    <div class="result-logo">
+        <i class="fa-solid fa-droplet"></i>
+        <span>Drop<span>4</span>Life</span>
+    </div>
+
+    <a href="a.jsp" class="dashboard-link">
+        <i class="fa-solid fa-arrow-left"></i> Dashboard
+    </a>
+</nav>
+
+<main class="result-container">
+
+    <section class="success-message">
+        <div class="success-icon">
+            <i class="fa-solid fa-users"></i>
+        </div>
+        <div>
+            <h2>Donor Availability</h2>
+            <p>Find donors matching your submitted blood request.</p>
+        </div>
+    </section>
+
+    <section class="donor-heading">
+        <div>
+            <h1>Available Donors</h1>
+            <p>Matching donors are retrieved from the database.</p>
+        </div>
+        <div class="donor-count">
+            <i class="fa-solid fa-users"></i>
+            <span id="donorCount">Loading donors...</span>
+        </div>
+    </section>
+
+    <section id="donorList" class="donor-list" aria-live="polite">
+        <p>Loading matching donors...</p>
+    </section>
+
+    <section class="information-box">
+        <i class="fa-solid fa-circle-info"></i>
+        <p>Please contact a matching donor and coordinate with the hospital.
+           Confirm donor eligibility and availability before proceeding.</p>
+    </section>
+
+    <div class="bottom-actions">
+        <a href="a.jsp" class="back-btn">
+            <i class="fa-solid fa-arrow-left"></i> Back to Dashboard
+        </a>
+    </div>
+
+</main>
+
+<script>
+document.addEventListener("DOMContentLoaded", loadMatchingDonors);
+
+async function loadMatchingDonors() {
+    const donorList = document.getElementById("donorList");
+    const donorCount = document.getElementById("donorCount");
+
+    const params = new URLSearchParams(window.location.search);
+    const requestId = params.get("requestId");
+
+    if (!requestId || !/^\d+$/.test(requestId) || Number(requestId) <= 0) {
+        donorCount.textContent = "Request unavailable";
+        donorList.textContent =
+            "A valid blood request ID was not provided. Please submit your blood request again.";
+        return;
+    }
+
+    try {
+        const response = await fetch(
+            `${window.location.origin}${window.location.pathname.substring(0, window.location.pathname.indexOf("/HTML/"))}/api/matchingDonors?requestId=${encodeURIComponent(requestId)}`,
+            { credentials: "same-origin" }
+        );
+
+        if (response.status === 401) {
+            donorCount.textContent = "Login required";
+            donorList.textContent = "Please log in to view matching donors.";
+            return;
+        }
+
+        if (response.status === 403) {
+            throw new Error("You cannot view donors for this blood request.");
+        }
+
+        if (response.status === 404) {
+            throw new Error("The blood request could not be found.");
+        }
+
+        if (!response.ok) {
+            throw new Error("Unable to load donors. Please try again.");
+        }
+
+        const donors = await response.json();
+
+        donorCount.textContent = `${donors.length} donor(s) found`;
+        donorList.replaceChildren();
+
+        if (donors.length === 0) {
+            donorList.textContent = "No matching donors found.";
+            return;
+        }
+
+        donors.forEach(donor => {
+            const card = document.createElement("article");
+            card.className = "donor-card";
+
+            const main = document.createElement("div");
+            main.className = "donor-main";
+
+            const icon = document.createElement("div");
+            icon.className = "donor-icon";
+            icon.innerHTML = '<i class="fa-solid fa-user"></i>';
+
+            const info = document.createElement("div");
+            info.className = "donor-info";
+
+            const name = document.createElement("h3");
+            name.textContent = donor.fullName || "Donor";
+
+            const city = document.createElement("p");
+            city.textContent = donor.city || "City not provided";
+
+            info.append(name, city);
+            main.append(icon, info);
+
+            const blood = document.createElement("div");
+            blood.className = "donor-blood";
+            blood.textContent = donor.bloodGroup || "N/A";
+
+            const contact = document.createElement("div");
+            contact.className = "donor-contact";
+
+            if (donor.phone) {
+                const phone = document.createElement("p");
+                phone.className = "phone-number";
+                phone.textContent = donor.phone;
+
+                const call = document.createElement("a");
+                call.className = "call-btn";
+                call.href = "tel:" + String(donor.phone).replace(/[^+\\d]/g, "");
+                call.textContent = "Call Donor";
+
+                contact.append(phone, call);
+            } else {
+                contact.textContent = "Contact details unavailable";
+            }
+
+            card.append(main, blood, contact);
+            donorList.appendChild(card);
+        });
+
+    } catch (error) {
+        donorCount.textContent = "Unable to load";
+        donorList.textContent = error.message;
+    }
+}
+</script>
+
+</body>
+</html>

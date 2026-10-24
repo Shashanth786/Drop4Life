@@ -1,0 +1,750 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Drop4Life</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: #f5f7fb;
+            color: #202532;
+        }
+
+        .navbar {
+            background: #fff;
+            padding: 17px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, .06);
+        }
+
+        .logo {
+            color: #d90429;
+            font-size: 23px;
+            font-weight: 700;
+        }
+
+        .logo i {
+            margin-right: 8px;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .nav-actions a,
+        .nav-actions button {
+            text-decoration: none;
+            padding: 10px 15px;
+            border: 0;
+            border-radius: 7px;
+            cursor: pointer;
+            font: 500 13px 'Poppins', sans-serif;
+        }
+
+        .home-btn {
+            color: #343a40;
+            background: #f0f1f4;
+        }
+
+        .logout-btn {
+            color: #fff;
+            background: #d90429;
+        }
+
+        .container {
+            width: 92%;
+            max-width: 1400px;
+            margin: 35px auto 60px;
+        }
+
+        .page-heading h1 {
+            margin: 0;
+            font-size: 28px;
+        }
+
+        .page-heading p {
+            margin: 7px 0 25px;
+            color: #707785;
+            font-size: 14px;
+        }
+
+        .status-message {
+            display: none;
+            margin-bottom: 18px;
+            padding: 12px 15px;
+            border-radius: 8px;
+            background: #fff0f0;
+            color: #a61b1b;
+            font-size: 13px;
+        }
+
+        .status-message.show {
+            display: block;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 18px;
+            margin-bottom: 30px;
+        }
+
+        .summary-card {
+            background: #fff;
+            padding: 23px;
+            border-radius: 13px;
+            box-shadow: 0 4px 18px rgba(0, 0, 0, .04);
+            border: 1px solid #eceef3;
+        }
+
+        .summary-card .label {
+            display: block;
+            color: #747c8b;
+            font-size: 13px;
+        }
+
+        .summary-card .number {
+            display: block;
+            margin-top: 8px;
+            font-size: 29px;
+            font-weight: 700;
+        }
+
+        .summary-card i {
+            color: #d90429;
+            margin-right: 7px;
+        }
+
+        .section-panel {
+            background: #fff;
+            padding: 23px;
+            border: 1px solid #eceef3;
+            border-radius: 13px;
+            box-shadow: 0 4px 18px rgba(0, 0, 0, .04);
+        }
+
+        .tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 9px;
+            margin-bottom: 22px;
+        }
+
+        .tab-btn {
+            border: 1px solid #e0e3e9;
+            background: #fff;
+            padding: 11px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            color: #454c59;
+            font: 500 13px 'Poppins', sans-serif;
+        }
+
+        .tab-btn.active {
+            background: #d90429;
+            border-color: #d90429;
+            color: #fff;
+        }
+
+        .table-heading {
+            margin: 0 0 16px;
+            font-size: 19px;
+        }
+
+        .table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 700px;
+        }
+
+        th,
+        td {
+            padding: 13px 12px;
+            border-bottom: 1px solid #edf0f4;
+            text-align: left;
+            vertical-align: top;
+            font-size: 12px;
+        }
+
+        th {
+            background: #f7f8fb;
+            color: #555e6e;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        td {
+            overflow-wrap: anywhere;
+        }
+
+        .delete-btn {
+            border: 0;
+            border-radius: 6px;
+            background: #fff0f0;
+            color: #b42332;
+            padding: 8px 10px;
+            font: 500 12px 'Poppins', sans-serif;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .delete-btn:hover {
+            background: #d90429;
+            color: white;
+        }
+
+        .loading {
+            padding: 22px 0;
+            color: #707785;
+            font-size: 13px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 9px;
+            border-radius: 20px;
+            background: #eaf7ee;
+            color: #20783c;
+            font-size: 11px;
+        }
+
+        .badge.admin {
+            background: #fff0dc;
+            color: #925400;
+        }
+
+        footer {
+            padding: 22px;
+            text-align: center;
+            color: #7b8190;
+            font-size: 12px;
+        }
+
+        @media (max-width: 900px) {
+            .summary-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 550px) {
+            .navbar {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .summary-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                width: 94%;
+            }
+
+            .section-panel {
+                padding: 15px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="../CSS/responsive.css">
+    <script src="../JS/mobile-nav.js" defer></script>
+</head>
+
+<body>
+
+<nav class="navbar">
+    <div class="logo">
+        <i class="fa-solid fa-droplet"></i> DROP4LIFE ADMIN
+    </div>
+
+    <div class="nav-actions">
+        <a href="../index.html" class="home-btn">
+            <i class="fa-solid fa-house"></i> Home
+        </a>
+
+        <button type="button" class="logout-btn" id="logoutBtn">
+            <i class="fa-solid fa-right-from-bracket"></i> Logout
+        </button>
+    </div>
+</nav>
+
+<main class="container">
+
+    <div class="page-heading">
+        <h1>Admin Dashboard</h1>
+        <p>Manage users, donors, blood requests and Contact Us messages.</p>
+    </div>
+
+    <div id="statusMessage"
+         class="status-message"
+         role="status"
+         aria-live="polite"></div>
+
+    <section class="summary-grid" aria-label="Dashboard summary">
+
+        <div class="summary-card">
+            <span class="label">
+                <i class="fa-solid fa-users"></i> Registered Users
+            </span>
+            <strong class="number" id="userCount">—</strong>
+        </div>
+
+        <div class="summary-card">
+            <span class="label">
+                <i class="fa-solid fa-hand-holding-heart"></i> Donors
+            </span>
+            <strong class="number" id="donorCount">—</strong>
+        </div>
+
+        <div class="summary-card">
+            <span class="label">
+                <i class="fa-solid fa-droplet"></i> Blood Requests
+            </span>
+            <strong class="number" id="requestCount">—</strong>
+        </div>
+
+        <div class="summary-card">
+            <span class="label">
+                <i class="fa-solid fa-envelope"></i> Contact Messages
+            </span>
+            <strong class="number" id="messageCount">—</strong>
+        </div>
+
+    </section>
+
+    <section class="section-panel">
+
+        <div class="tabs" role="tablist" aria-label="Admin sections">
+            <button class="tab-btn active" data-view="users">Users</button>
+            <button class="tab-btn" data-view="donors">Donors</button>
+            <button class="tab-btn" data-view="bloodRequests">Blood Requests</button>
+            <button class="tab-btn" data-view="contactMessages">Contact Messages</button>
+        </div>
+
+        <h2 id="tableHeading" class="table-heading">Registered Users</h2>
+
+        <div id="tableContent" aria-live="polite">
+            <p class="loading">Loading dashboard data...</p>
+        </div>
+
+    </section>
+
+</main>
+
+<footer>
+    &copy; 2026 Drop4Life. Administrator access is restricted.
+</footer>
+
+<script>
+    const contextPath = (() => {
+        const path = window.location.pathname;
+        const marker = "/HTML/";
+        const index = path.indexOf(marker);
+
+        return index >= 0 ? path.substring(0, index) : "";
+    })();
+
+    const tableContent = document.getElementById("tableContent");
+    const statusMessage = document.getElementById("statusMessage");
+
+    let currentView = "users";
+
+    function showError(message) {
+        statusMessage.textContent = message;
+        statusMessage.classList.add("show");
+    }
+
+    function clearError() {
+        statusMessage.textContent = "";
+        statusMessage.classList.remove("show");
+    }
+
+    async function apiRequest(path, options = {}) {
+        const response = await fetch(contextPath + path, {
+            credentials: "same-origin",
+            cache: "no-store",
+            headers: {
+                "Accept": "application/json",
+                ...(options.headers || {})
+            },
+            ...options
+        });
+
+        if (response.status === 401) {
+            window.location.replace(contextPath + "/login.html");
+            throw new Error("Your session has expired. Please log in again.");
+        }
+
+        if (response.status === 403) {
+            throw new Error("Administrator access is required for this operation.");
+        }
+
+        const text = await response.text();
+        let data = {};
+
+        if (text) {
+            try {
+                data = JSON.parse(text);
+            } catch (_) {
+                data = { message: text };
+            }
+        }
+
+        if (!response.ok) {
+            throw new Error(
+                data.detail || data.message || "Request failed."
+            );
+        }
+
+        return data;
+    }
+
+    async function loadSummary() {
+        const summary = await apiRequest("/api/admin/summary");
+
+        document.getElementById("userCount").textContent =
+            summary.users ?? 0;
+
+        document.getElementById("donorCount").textContent =
+            summary.donors ?? 0;
+
+        document.getElementById("requestCount").textContent =
+            summary.bloodRequests ?? 0;
+
+        document.getElementById("messageCount").textContent =
+            summary.contactMessages ?? 0;
+    }
+
+    function addCell(row, value) {
+        const cell = document.createElement("td");
+
+        // textContent prevents database content from being interpreted as HTML
+        cell.textContent =
+            value === null || value === undefined || value === ""
+                ? "—"
+                : String(value);
+
+        row.appendChild(cell);
+        return cell;
+    }
+
+    function makeTable(columns, rows) {
+        if (!Array.isArray(rows) || rows.length === 0) {
+            const empty = document.createElement("p");
+            empty.className = "loading";
+            empty.textContent = "No records found.";
+            tableContent.replaceChildren(empty);
+            return;
+        }
+
+        const wrapper = document.createElement("div");
+        wrapper.className = "table-wrapper";
+
+        const table = document.createElement("table");
+        const thead = document.createElement("thead");
+        const headerRow = document.createElement("tr");
+
+        columns.forEach(column => {
+            const th = document.createElement("th");
+            th.textContent = column.label;
+            headerRow.appendChild(th);
+        });
+
+        thead.appendChild(headerRow);
+        table.appendChild(thead);
+
+        const tbody = document.createElement("tbody");
+
+        rows.forEach(item => {
+            const tr = document.createElement("tr");
+
+            columns.forEach(column => {
+                const cell = addCell(tr, column.value(item));
+                
+                if (column.render) {
+                    cell.textContent = "";
+                    column.render(cell, item);
+                }
+            });
+
+            tbody.appendChild(tr);
+        });
+
+        table.appendChild(tbody);
+        wrapper.appendChild(table);
+        tableContent.replaceChildren(wrapper);
+    }
+
+    function addDeleteButton(cell, label, callback) {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "delete-btn";
+        button.innerHTML = '<i class="fa-solid fa-trash"></i> ' + label;
+        button.addEventListener("click", callback);
+        cell.appendChild(button);
+    }
+
+    async function deleteUser(user) {
+        if (String(user.role).toUpperCase() === "ADMIN") {
+            alert("Administrator accounts cannot be deleted here.");
+            return;
+        }
+
+        const confirmed = confirm(
+            "Delete " + user.fullName +
+            " and their associated donor registration and blood requests? " +
+            "This action cannot be undone."
+        );
+
+        if (!confirmed) return;
+
+        try {
+            clearError();
+
+            await apiRequest(
+                "/api/admin/users/" + encodeURIComponent(user.userId),
+                { method: "DELETE" }
+            );
+
+            await loadSummary();
+            await loadView("users");
+
+            alert("User and associated records deleted.");
+
+        } catch (error) {
+            showError(error.message);
+        }
+    }
+
+    async function deleteMessage(message) {
+        const confirmed = confirm(
+            "Delete the contact message from " +
+            message.fullName + "?"
+        );
+
+        if (!confirmed) return;
+
+        try {
+            clearError();
+
+            await apiRequest(
+                "/api/admin/contactMessages/" +
+                encodeURIComponent(message.messageId),
+                { method: "DELETE" }
+            );
+
+            await loadSummary();
+            await loadView("contactMessages");
+
+            alert("Contact message deleted successfully.");
+
+        } catch (error) {
+            showError(error.message);
+        }
+    }
+
+    async function loadView(view) {
+        currentView = view;
+        clearError();
+
+        document.querySelectorAll(".tab-btn").forEach(button => {
+            button.classList.toggle(
+                "active",
+                button.dataset.view === view
+            );
+        });
+
+        tableContent.innerHTML =
+            '<p class="loading">Loading data...</p>';
+
+        const headings = {
+            users: "Registered Users",
+            donors: "Registered Donors",
+            bloodRequests: "Blood Requests",
+            contactMessages: "Contact Us Messages"
+        };
+
+        document.getElementById("tableHeading").textContent =
+            headings[view];
+
+        try {
+            if (view === "users") {
+                const users = await apiRequest("/api/admin/users");
+
+                makeTable([
+                    { label: "ID", value: u => u.userId },
+                    { label: "Name", value: u => u.fullName },
+                    { label: "Email", value: u => u.email },
+                    { label: "Phone", value: u => u.phone },
+                    { label: "Blood Group", value: u => u.bloodGroup },
+                    {
+                        label: "Role",
+                        value: u => u.role,
+                        render: (cell, u) => {
+                            const badge = document.createElement("span");
+                            badge.className = "badge";
+
+                            if (String(u.role).toUpperCase() === "ADMIN") {
+                                badge.classList.add("admin");
+                            }
+
+                            badge.textContent = u.role || "USER";
+                            cell.appendChild(badge);
+                        }
+                    },
+                    {
+                        label: "Action",
+                        value: () => "",
+                        render: (cell, u) => {
+                            if (String(u.role).toUpperCase() !== "ADMIN") {
+                                addDeleteButton(
+                                    cell, "Delete", () => deleteUser(u)
+                                );
+                            } else {
+                                cell.textContent = "Protected admin";
+                            }
+                        }
+                    }
+                ], users);
+
+            } else if (view === "donors") {
+                const donors = await apiRequest("/api/admin/donors");
+
+                makeTable([
+                    { label: "Donor ID", value: d => d.donorId },
+                    { label: "Name", value: d => d.fullName },
+                    { label: "Email", value: d => d.email },
+                    { label: "Phone", value: d => d.phone },
+                    { label: "Blood Group", value: d => d.bloodGroup },
+                    { label: "Age", value: d => d.age },
+                    { label: "City", value: d => d.city }
+                ], donors);
+
+            } else if (view === "bloodRequests") {
+                const requests =
+                    await apiRequest("/api/admin/bloodRequests");
+
+                makeTable([
+                    { label: "Request ID", value: r => r.requestId },
+                    { label: "Patient", value: r => r.patientName },
+                    { label: "Blood Group", value: r => r.bloodGroup },
+                    { label: "Units", value: r => r.unitsRequired },
+                    { label: "Urgency", value: r => r.urgency },
+                    { label: "City", value: r => r.city },
+                    { label: "Hospital", value: r => r.hospitalName },
+                    { label: "Requester", value: r => r.requesterName },
+                    { label: "Contact", value: r => r.requesterPhone }
+                ], requests);
+
+            } else if (view === "contactMessages") {
+                const messages =
+                    await apiRequest("/api/admin/contactMessages");
+
+                makeTable([
+                    { label: "ID", value: m => m.messageId },
+                    { label: "Name", value: m => m.fullName },
+                    { label: "Email", value: m => m.email },
+                    { label: "Subject", value: m => m.subject },
+                    { label: "Message", value: m => m.message },
+                    { label: "Submitted At", value: m => m.submittedAt },
+                    {
+                        label: "Action",
+                        value: () => "",
+                        render: (cell, m) => {
+                            addDeleteButton(
+                                cell, "Delete", () => deleteMessage(m)
+                            );
+                        }
+                    }
+                ], messages);
+            }
+
+        } catch (error) {
+            tableContent.replaceChildren();
+
+            const message = document.createElement("p");
+            message.className = "loading";
+            message.textContent = error.message;
+
+            tableContent.appendChild(message);
+            showError(error.message);
+        }
+    }
+
+    document.querySelectorAll(".tab-btn").forEach(button => {
+        button.addEventListener("click", () => {
+            loadView(button.dataset.view);
+        });
+    });
+
+    document.getElementById("logoutBtn").addEventListener(
+        "click",
+        async function () {
+            this.disabled = true;
+
+            try {
+                const response = await fetch(
+                    contextPath + "/api/logout",
+                    {
+                        method: "POST",
+                        credentials: "same-origin",
+                        cache: "no-store",
+                        headers: { "Accept": "application/json" }
+                    }
+                );
+
+                if (!response.ok) {
+                    throw new Error("Logout failed.");
+                }
+
+                window.location.replace(contextPath + "/login.html");
+
+            } catch (error) {
+                showError(error.message);
+                this.disabled = false;
+            }
+        }
+    );
+
+    // Confirm admin authorization by requesting protected admin data.
+    async function initializeDashboard() {
+        try {
+            await loadSummary();
+            await loadView("users");
+        } catch (error) {
+            showError(error.message);
+        }
+    }
+
+    window.addEventListener("pageshow", function () {
+        initializeDashboard();
+    });
+</script>
+
+</body>
+</html>
