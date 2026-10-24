@@ -39,6 +39,8 @@
     <!-- Dashboard CSS --> 
     <link rel="stylesheet" href="../CSS/a.css">
 
+    <link rel="stylesheet" href="../CSS/responsive.css">
+    <script src="../JS/mobile-nav.js" defer></script>
 </head>
 
 
