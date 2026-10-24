@@ -1,0 +1,656 @@
+
+/* =========================================
+   DROP4LIFE DONOR REGISTRATION
+   ========================================= */
+
+:root {
+    --brand-red: #d90429;
+    --brand-red-dark: #b90324;
+    --brand-red-light: #fff0f3;
+    --text-dark: #202938;
+    --text-muted: #6b7280;
+    --border-color: #e5e7eb;
+    --page-background: #f6f7fb;
+    --white: #ffffff;
+    --shadow: 0 16px 45px rgba(31, 41, 55, 0.08);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Poppins', sans-serif;
+    background: var(--page-background);
+    color: var(--text-dark);
+    -webkit-font-smoothing: antialiased;
+}
+
+a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* =========================================
+   NAVBAR
+   ========================================= */
+
+.navbar {
+    width: 100%;
+    min-height: 78px;
+    background: var(--white);
+    border-bottom: 1px solid #f0f0f0;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.035);
+    position: relative;
+    z-index: 10;
+}
+
+.navbar-inner {
+    width: min(1240px, 90%);
+    min-height: 78px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+/* Brand: red drop, dark text, red number */
+
+.logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+    text-decoration: none;
+    color: var(--text-dark);
+}
+
+.logo-icon {
+    color: #d90429;
+    font-size: 27px;
+}
+
+.logo:hover .logo-icon {
+    transform: translateY(-2px);
+}
+
+.logo-text {
+    color: #202938;
+    font-size: 25px;
+    font-weight: 800;
+    letter-spacing: -0.8px;
+    text-decoration: none !important;
+}
+
+.logo-four {
+    color: var(--brand-red);
+}
+
+/* Navigation Links */
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 32px;
+    margin-left: auto;
+}
+
+.nav-links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+    padding: 10px 0;
+    color: #384152;
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color 0.2s ease;
+}
+
+.nav-links a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 3px;
+    width: 0;
+    height: 2px;
+    background: var(--brand-red);
+    border-radius: 2px;
+    transition: width 0.25s ease;
+}
+
+.nav-links a:hover {
+    color: var(--brand-red);
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+.nav-links a i {
+    font-size: 13px;
+    color: var(--brand-red);
+}
+
+/* =========================================
+   MAIN PAGE
+   ========================================= */
+
+.donor-section {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 20px 54px;
+    background:
+        radial-gradient(
+            circle at 8% 18%,
+            rgba(217, 4, 41, 0.035),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 92% 82%,
+            rgba(217, 4, 41, 0.035),
+            transparent 28%
+        ),
+        var(--page-background);
+}
+
+/* Registration Card */
+
+.donor-container {
+    width: 100%;
+    max-width: 760px;
+    padding: 40px 46px;
+    background: var(--white);
+    border: 1px solid rgba(229, 231, 235, 0.8);
+    border-radius: 22px;
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+    animation: cardEnter 0.45s ease both;
+}
+
+.donor-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(
+        90deg,
+        var(--brand-red),
+        #ff718b
+    );
+}
+
+@keyframes cardEnter {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* =========================================
+   HEADING
+   ========================================= */
+
+.form-heading {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.blood-icon {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 17px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--brand-red-light);
+    border: 1px solid #ffe0e6;
+    border-radius: 20px;
+    color: var(--brand-red);
+    font-size: 27px;
+}
+
+.eyebrow {
+    display: inline-block;
+    margin-bottom: 9px;
+    color: var(--brand-red);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.form-heading h1 {
+    margin-bottom: 11px;
+    color: var(--text-dark);
+    font-size: clamp(25px, 3vw, 31px);
+    line-height: 1.3;
+    font-weight: 700;
+    letter-spacing: -0.8px;
+}
+
+.form-heading p {
+    max-width: 510px;
+    margin: 0 auto;
+    color: var(--text-muted);
+    font-size: 13px;
+    line-height: 1.9;
+}
+
+/* =========================================
+   FORM FIELDS
+   ========================================= */
+
+.donor-form {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
+}
+
+.form-group {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.form-group label {
+    color: #303847;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.input-box {
+    width: 100%;
+    height: 54px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 15px;
+    background: #ffffff;
+    border: 1px solid #dfe3e9;
+    border-radius: 11px;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+.input-box i {
+    width: 18px;
+    flex-shrink: 0;
+    color: var(--brand-red);
+    font-size: 15px;
+    text-align: center;
+}
+
+.input-box input {
+    min-width: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: var(--text-dark);
+    font-family: inherit;
+    font-size: 13px;
+}
+
+.input-box input::placeholder {
+    color: #9ca3af;
+    opacity: 1;
+}
+
+.input-box:focus-within {
+    border-color: var(--brand-red);
+    background: #fffdfd;
+    box-shadow: 0 0 0 4px rgba(217, 4, 41, 0.07);
+}
+
+.field-hint {
+    color: #8b93a1;
+    font-size: 10px;
+    line-height: 1.6;
+}
+
+/* =========================================
+   REGISTER BUTTON
+   ========================================= */
+
+.register-btn {
+    width: 100%;
+    min-height: 54px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 14px 20px;
+    border: 1px solid var(--brand-red);
+    border-radius: 11px;
+    background: var(--brand-red);
+    color: var(--white);
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 6px 14px rgba(217, 4, 41, 0.15);
+    transition:
+        background 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
+}
+
+.register-btn i {
+    font-size: 13px;
+    transition: transform 0.2s ease;
+}
+
+.register-btn:hover {
+    background: var(--brand-red-dark);
+    border-color: var(--brand-red-dark);
+    box-shadow: 0 9px 20px rgba(217, 4, 41, 0.2);
+    transform: translateY(-1px);
+}
+
+.register-btn:hover i {
+    transform: translateX(4px);
+}
+
+.register-btn:focus-visible {
+    outline: 3px solid rgba(217, 4, 41, 0.25);
+    outline-offset: 3px;
+}
+
+.register-btn:active {
+    transform: translateY(0);
+}
+
+.form-security {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: -10px;
+    color: #7b8492;
+    font-size: 10px;
+    text-align: center;
+    line-height: 1.7;
+}
+
+.form-security i {
+    color: #198754;
+    font-size: 13px;
+}
+
+/* =========================================
+   INFORMATION NOTE
+   ========================================= */
+
+.donor-note {
+    display: flex;
+    align-items: flex-start;
+    gap: 13px;
+    margin-top: 30px;
+    padding: 17px 18px;
+    background: #fff6f7;
+    border: 1px solid #ffeaee;
+    border-radius: 13px;
+}
+
+.note-icon {
+    width: 34px;
+    height: 34px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: #ffe5ea;
+    color: var(--brand-red);
+    font-size: 14px;
+}
+
+.donor-note h3 {
+    margin: 0 0 5px;
+    color: #303847;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.donor-note p {
+    color: #707887;
+    font-size: 11px;
+    line-height: 1.9;
+}
+
+/* =========================================
+   ERROR MESSAGE
+   ========================================= */
+
+.form-message {
+    margin-bottom: 22px;
+    padding: 13px 15px;
+    border-radius: 10px;
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+.form-message.error {
+    color: #a61b2b;
+    background: #fff1f2;
+    border: 1px solid #fecdd3;
+}
+
+.form-message[hidden] {
+    display: none !important;
+}
+
+/* =========================================
+   FOOTER
+   ========================================= */
+
+.site-footer {
+    width: 100%;
+    min-height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 20px;
+    background: var(--white);
+    border-top: 1px solid #e9ebef;
+    text-align: center;
+}
+
+.site-footer p {
+    color: #858c98;
+    font-size: 11px;
+    line-height: 1.8;
+}
+
+.site-footer p span {
+    color: #4b5563;
+    font-weight: 500;
+}
+
+/* =========================================
+   TABLET
+   ========================================= */
+
+@media (max-width: 800px) {
+
+    .navbar-inner {
+        width: 92%;
+        gap: 20px;
+    }
+
+    .nav-links {
+        gap: 19px;
+    }
+
+    .nav-links a {
+        font-size: 11px;
+        gap: 6px;
+    }
+
+    .logo-text {
+        font-size: 22px;
+    }
+
+    .donor-container {
+        max-width: 700px;
+        padding: 35px 32px;
+    }
+}
+
+/* =========================================
+   MOBILE
+   ========================================= */
+
+@media (max-width: 600px) {
+
+    .navbar {
+        min-height: auto;
+    }
+
+    .navbar-inner {
+        width: 100%;
+        min-height: auto;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 17px 20px 12px;
+    }
+
+    .logo-text {
+        font-size: 23px;
+    }
+
+    .logo-icon {
+        font-size: 25px;
+    }
+
+    .nav-links {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px 22px;
+    }
+
+    .nav-links a {
+        padding: 6px 0;
+        font-size: 11px;
+    }
+
+    .nav-links a::after {
+        bottom: 0;
+    }
+
+    .donor-section {
+        padding: 32px 14px 38px;
+        align-items: flex-start;
+    }
+
+    .donor-container {
+        padding: 30px 21px;
+        border-radius: 17px;
+    }
+
+    .form-heading {
+        margin-bottom: 26px;
+    }
+
+    .blood-icon {
+        width: 56px;
+        height: 56px;
+        margin-bottom: 14px;
+        border-radius: 17px;
+        font-size: 24px;
+    }
+
+    .eyebrow {
+        font-size: 9px;
+        letter-spacing: 1.5px;
+    }
+
+    .form-heading h1 {
+        font-size: 25px;
+    }
+
+    .form-heading p {
+        font-size: 12px;
+    }
+
+    .donor-form {
+        gap: 22px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .input-box {
+        height: 52px;
+    }
+
+    .register-btn {
+        min-height: 52px;
+        font-size: 13px;
+    }
+
+    .donor-note {
+        margin-top: 25px;
+        padding: 14px;
+    }
+
+    .donor-note p {
+        font-size: 10px;
+    }
+
+    .site-footer {
+        padding: 13px 15px;
+    }
+}
+
+/* Respect reduced-motion preferences */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}

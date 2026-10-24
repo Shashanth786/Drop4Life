@@ -1,0 +1,267 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Blood Requests - Drop4Life</title>
+
+    <link rel="stylesheet" href="../CSS/recipients.css">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">
+            <img src="../Images/drop 4.png" alt="Drop4Life">
+            <span>Drop4Life</span>
+        </div>
+
+        <div class="nav-links">
+            <a href="a.jsp">
+                <i class="fa-solid fa-house"></i>
+                Dashboard
+            </a>
+
+            <a href="profile.html">
+                <i class="fa-solid fa-user"></i>
+                My Profile
+            </a>
+        </div>
+    </nav>
+
+    <!-- Blood Requests -->
+    <section class="requests-section">
+        <div class="requests-container">
+
+            <div class="page-heading">
+                <div class="heading-icon">
+                    <i class="fa-solid fa-hand-holding-droplet"></i>
+                </div>
+
+                <h1>Blood Requests</h1>
+
+                <p>
+                    Find people who need blood matching your blood group and city.
+                </p>
+            </div>
+
+            <!-- Requests are loaded dynamically from the database -->
+            <div id="requestsList" aria-live="polite">
+                <p>Loading matching blood requests...</p>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Drop4Life. Every Drop Can Save a Life.</p>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", loadMatchingRequests);
+
+        async function loadMatchingRequests() {
+
+            const requestsList = document.getElementById("requestsList");
+
+            try {
+                const response = await fetch(
+                    "/Drop4Life/api/matchingRequests",
+                    {
+                        method: "GET",
+                        credentials: "same-origin",
+                        headers: {
+                            "Accept": "application/json"
+                        }
+                    }
+                );
+
+                if (response.status === 401) {
+                    requestsList.textContent =
+                        "Please log in to view matching blood requests.";
+                    return;
+                }
+
+                if (!response.ok) {
+                    throw new Error(
+                        "Failed to load requests. Status: " + response.status
+                    );
+                }
+
+                const requests = await response.json();
+
+                requestsList.replaceChildren();
+
+                if (!Array.isArray(requests) || requests.length === 0) {
+                    requestsList.textContent =
+                        "No blood requests currently match your blood group and city.";
+                    return;
+                }
+
+                requests.forEach(request => {
+
+                    const card = document.createElement("div");
+                    card.className = "request-card";
+
+                    // Request heading
+                    const top = document.createElement("div");
+                    top.className = "request-top";
+
+                    const heading = document.createElement("div");
+
+                    const name = document.createElement("h2");
+                    name.textContent = request.patientName || "Patient";
+
+                    const urgency = document.createElement("span");
+                    const level = String(
+                        request.urgency || "Normal"
+                    ).trim().toLowerCase();
+
+                    urgency.className = "urgency " +
+                        (level === "emergency" ? "emergency" : "normal");
+
+                    urgency.textContent = request.urgency || "Normal";
+
+                    heading.append(name, urgency);
+
+                    const blood = document.createElement("div");
+                    blood.className = "blood-group";
+                    blood.textContent = request.bloodGroup || "N/A";
+
+                    top.append(heading, blood);
+
+                    // Request details
+                    const details = document.createElement("div");
+                    details.className = "request-details";
+
+                    function addDetail(iconClass, label, value) {
+
+                        const detail = document.createElement("div");
+                        detail.className = "detail";
+
+                        const icon = document.createElement("i");
+                        icon.className = iconClass;
+
+                        const content = document.createElement("div");
+
+                        const small = document.createElement("small");
+                        small.textContent = label;
+
+                        const text = document.createElement("p");
+
+                        text.textContent =
+                            value !== null && value !== undefined && value !== ""
+                                ? String(value)
+                                : "Not provided";
+
+                        content.append(small, text);
+                        detail.append(icon, content);
+                        details.append(detail);
+                    }
+
+                    addDetail(
+                        "fa-solid fa-location-dot",
+                        "Location",
+                        request.city
+                    );
+
+                    addDetail(
+                        "fa-solid fa-hospital",
+                        "Hospital",
+                        request.hospitalName
+                    );
+
+                    addDetail(
+                        "fa-solid fa-droplet",
+                        "Units Required",
+                        request.unitsRequired != null
+                            ? request.unitsRequired + " Unit(s)"
+                            : null
+                    );
+
+                    addDetail(
+                        "fa-solid fa-notes-medical",
+                        "Purpose",
+                        request.purpose
+                    );
+
+                    addDetail(
+                        "fa-solid fa-map-location-dot",
+                        "Hospital Address",
+                        request.hospitalAddress
+                    );
+
+                    // Request status and requester contact number
+                    const bottom = document.createElement("div");
+                    bottom.className = "request-bottom";
+
+                    const status = document.createElement("span");
+                    status.className = "request-status";
+
+                    const statusIcon = document.createElement("i");
+                    statusIcon.className = "fa-solid fa-circle";
+
+                    status.append(
+                        statusIcon,
+                        document.createTextNode(" Blood Required")
+                    );
+
+                    const phone = request.contactPhone != null
+                        ? String(request.contactPhone).trim()
+                        : "";
+
+                    let contact;
+
+                    if (phone && /[0-9]/.test(phone)) {
+
+                        contact = document.createElement("a");
+
+                        const telNumber = phone.replace(/[^\d+]/g, "");
+
+                        contact.href = "tel:" + telNumber;
+                        contact.textContent = "Contact: " + phone;
+                        contact.className = "request-contact";
+
+                        contact.setAttribute(
+                            "aria-label",
+                            "Call requester at " + phone
+                        );
+
+                    } else {
+
+                        contact = document.createElement("span");
+                        contact.textContent = "Contact number unavailable";
+                        contact.className = "request-contact";
+                    }
+
+                    bottom.append(status, contact);
+
+                    card.append(top, details, bottom);
+
+                    requestsList.append(card);
+                });
+
+            } catch (error) {
+
+                console.error(
+                    "Error loading matching requests:",
+                    error
+                );
+
+                requestsList.textContent =
+                    "Unable to load requests. Please try again.";
+            }
+        }
+    </script>
+
+</body>
+</html>

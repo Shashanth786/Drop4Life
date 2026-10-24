@@ -1,0 +1,316 @@
+
+
+
+
+/* main section */
+
+
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+   font-family: 'poppins',sans-serif;
+}
+
+.hero{
+    position:relative;
+    width:100%;
+    overflow:hidden;
+}
+
+.hero-img{
+    width:100%;
+    display:block;
+}
+
+/* CARDS */
+
+.card{
+    position:absolute;
+    width:180px;
+    padding:20px;
+    background:rgba(255,255,255,0.95);
+    backdrop-filter:blur(10px);
+    border-radius:20px;
+    text-align:center;
+    box-shadow:0 10px 30px rgba(0,0,0,0.12);
+    border:1px solid rgba(255,255,255,0.7);
+    cursor:pointer;
+
+    transition:
+    transform 0.4s ease,
+    box-shadow 0.4s ease,
+    background 0.4s ease;
+}
+
+.card:hover{
+    transform:translateY(-2px) scale(1.08);
+    box-shadow:
+    0 20px 40px rgba(0,0,0,0.15),
+    0 0 25px rgba(255,0,0,0.15);
+    background:#fff;
+}
+
+.card i{
+    font-size:24px;
+    color:#e60000;
+    margin-bottom:10px;
+    transition:0.4s;
+}
+
+.card:hover i{
+    transform:scale(1.2);
+}
+
+.card h2{
+    font-size:20px;
+    margin-bottom:5px;
+    transition:0.4s;
+}
+
+.card:hover h2{
+    color:#e60000;
+}
+
+.card p{
+    font-size:14px;
+    color:#666;
+}
+
+ /* ==========================
+   BLOOD DONATION PROCESS
+========================== */
+
+.donation-process{
+    position:absolute;
+    left:60px;
+    top:455px;
+
+    width:560px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    z-index:20;
+}
+
+.process-item{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    transition:.3s;
+}
+
+.process-item i{
+    width:55px;
+    height:55px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:#e53935;
+    color:#fff;
+    border-radius:50%;
+
+    font-size:22px;
+
+    box-shadow:0 8px 18px rgba(229,57,53,.25);
+    transition:.3s;
+}
+
+.process-item:hover i{
+    transform:translateY(-5px) scale(1.08);
+}
+
+.process-item span{
+    margin-top:8px;
+    font-size:15px;
+    font-weight:600;
+    color:#333;
+}
+
+.process-arrow{
+    font-size:26px;
+    color:#e53935;
+}
+
+
+/* CARD POSITIONS */
+
+.card1{
+    top:20%;
+    left:52%;
+}
+
+.card2{
+    top:25%;
+    right:7%;
+}
+
+.card3{
+    bottom:13%;
+    left:50%;
+}
+
+.card4{
+    bottom:13%;
+    right:6%;
+}
+
+/* TABLET */
+
+@media(max-width:992px){
+
+
+    .donation-process{
+    left:35px;
+    top:300px;
+    width:430px;
+}
+
+.process-item i{
+    width:45px;
+    height:45px;
+    font-size:18px;
+}
+
+.process-item span{
+    font-size:12px;
+}
+
+.process-arrow{
+    font-size:20px;
+}
+
+
+    .card{
+        width:140px;
+        padding:15px;
+    }
+
+    .card h2{
+        font-size:22px;
+    }
+
+    .card p{
+        font-size:12px;
+    }
+
+    .card1{
+        top:10%;
+        left:50%;
+    }
+
+    .card2{
+        top:20%;
+        right:4%;
+    }
+
+    .card3{
+        bottom:10%;
+        left:48%;
+    }
+
+    .card4{
+        bottom:10%;
+        right:3%;
+    }
+}
+
+/* MOBILE */
+@media(max-width:768px){
+
+   .donation-process{
+    left:15px;
+    top:205px;
+    width:320px;
+}
+
+.process-item i{
+    width:34px;
+    height:34px;
+    font-size:14px;
+}
+
+.process-item span{
+    font-size:10px;
+}
+
+.process-arrow{
+    font-size:14px;
+}
+
+    .card{
+        width:100px;
+        padding:8px;
+        border-radius:12px;
+    }
+
+    .card i{
+        font-size:14px;
+    }
+
+    .card h2{
+        font-size:14px;
+    }
+
+    .card p{
+        font-size:9px;
+    }
+
+    .card1{
+        top:5%;
+        left:45%;
+    }
+
+    .card2{
+        top:15%;
+        right:1%;
+    }
+
+    .card3{
+        bottom:5%;
+        left:43%;
+    }
+
+    .card4{
+        bottom:5%;
+        right:1%;
+    }
+}
+
+
+
+/* last cards */
+
+.features{
+width:90%;
+margin:50px auto;
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:25px;
+}
+
+.feature-card{
+background:rgb(255, 255, 255);
+padding:10px;
+border-radius:20px;
+border: 2px solid grey;
+text-align:center;
+box-shadow:0 5px 15px rgba(0,0,0,.08);
+transition:.4s;
+}
+
+.feature-card:hover{
+transform:translateY(-10px);
+box-shadow:0 15px 30px rgba(244, 117, 128, 0.544);
+}
+
+.icon{
+font-size:40px;
+color:#e60000;
+margin-bottom:15px;
+}

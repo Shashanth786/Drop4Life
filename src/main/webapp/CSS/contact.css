@@ -1,0 +1,497 @@
+/* =========================
+   CONTACT HERO
+========================= */
+body{
+    background-color: rgb(170, 170, 170);
+    margin: 0;
+    padding: 0;
+}
+.contact-hero{
+    text-align:center;
+    padding:60px 20px 40px;
+    /* background:linear-gradient(to right,#fff5f5,#ffffff); */
+}
+
+.contact-hero h1{
+    font-size:42px;
+    color:#e60000;
+    margin-bottom:15px;
+    font-family:'Poppins',sans-serif;
+}
+
+.contact-hero p{
+    color:#000000;
+    font-size:18px;
+    max-width:700px;
+    margin:auto;
+    line-height:1.7;
+    font-family:'Poppins',sans-serif;
+}
+
+/* =========================
+   CONTACT SECTION
+========================= */
+
+.contact-section{
+    width:90%;
+    margin:50px auto;
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:35px;
+    flex-wrap:wrap;
+}
+
+/* =========================
+   CONTACT FORM
+========================= */
+
+.contact-form{
+    flex:1;
+    min-width:350px;
+    background:#fff;
+    padding:35px;
+    border-radius:15px;
+    /* border: 3px solid rgb(255, 107, 107); */
+    box-shadow:8 8px 20px rgba(214, 0, 0, 0.08);
+}
+
+
+.contact-form h2{
+    color:#e60000;
+    margin-bottom:25px;
+    font-family:'Poppins',sans-serif;
+}
+
+.contact-form input,
+.contact-form textarea{
+
+    width:100%;
+    padding:14px;
+    margin-bottom:18px;
+
+    border:1px solid #ddd;
+    border-radius:8px;
+
+    outline:none;
+
+    font-size:15px;
+
+    font-family:'Poppins',sans-serif;
+
+    transition:.3s;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus{
+
+    border-color:#d32f2f;
+
+    box-shadow:0 0 8px rgba(211,47,47,.15);
+
+}
+
+.contact-form textarea{
+    resize:none;
+}
+
+.contact-form button{
+
+    width:100%;
+    padding:15px;
+
+    border:none;
+
+    background:#d32f2f;
+
+    color:#fff;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    font-size:16px;
+
+    transition:.3s;
+
+    font-family:'Poppins',sans-serif;
+
+}
+
+.contact-form button:hover{
+
+    background:#b71c1c;
+
+    transform:translateY(-3px);
+
+}
+
+.contact-form button i{
+
+    margin-right:8px;
+
+}
+
+/* =========================
+   CONTACT INFO
+========================= */
+
+.contact-info{
+
+    width:340px;
+
+    background:#fff;
+
+    padding:35px;
+
+    border-radius:15px;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+}
+
+.contact-info h2{
+
+    color:#e60000;
+
+    margin-bottom:25px;
+
+    font-family:'Poppins',sans-serif;
+
+}
+
+.social-box{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+
+    padding:16px;
+
+    margin-bottom:18px;
+
+    border-radius:10px;
+
+    background:#e0d7d7;
+
+    transition:.3s;
+
+    cursor:pointer;
+
+}
+
+.social-box:hover{
+
+    background:#d32f2f;
+
+    color:#fff;
+
+    transform:translateX(6px);
+
+}
+
+.social-box i{
+
+    font-size:28px;
+
+    color:#d32f2f;
+
+    width:40px;
+
+    text-align:center;
+
+    transition:.3s;
+
+}
+
+.social-box:hover i{
+
+    color:#fff;
+
+}
+
+.social-box h4{
+
+    margin-bottom:4px;
+
+    font-family:'Poppins',sans-serif;
+
+}
+
+.social-box p{
+
+    font-size:14px;
+
+    color:#666;
+
+    font-family:'Poppins',sans-serif;
+
+}
+
+.social-box:hover p{
+
+    color:#fff;
+
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:900px){
+
+.contact-section{
+
+    flex-direction:column;
+
+}
+
+.contact-info{
+
+    width:100%;
+
+}
+
+.contact-form{
+
+    width:100%;
+
+}
+
+}
+
+
+/* =========================
+      TEAM SECTION
+========================= */
+
+.team-section{
+
+    width:90%;
+    margin:70px auto;
+
+}
+
+.team-heading{
+
+    text-align:center;
+    margin-bottom:45px;
+
+}
+
+.team-heading h2{
+
+    color:#e60000;
+    font-size:38px;
+    margin-bottom:10px;
+    font-family:'Poppins',sans-serif;
+
+}
+
+.team-heading p{
+
+    color:#666;
+    font-size:17px;
+    font-family:'Poppins',sans-serif;
+
+}
+
+.team-container{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+
+    gap:25px;
+
+}
+
+.team-card{
+
+    background:#fff;
+
+    border-radius:18px;
+
+    padding:30px;
+
+    text-align:center;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+    transition:.4s;
+
+}
+
+.team-card img{
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+}
+
+.team-profile {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+}
+
+.team-card:hover{
+
+    transform:translateY(-10px);
+
+}
+
+.team-icon{
+
+    width:90px;
+    height:90px;
+
+    background:#ffeaea;
+
+    border-radius:50%;
+
+    margin:auto;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    margin-bottom:18px;
+
+}
+
+.team-icon i{
+
+    font-size:40px;
+    color:#d32f2f;
+
+}
+
+.team-card h3{
+
+    margin-bottom:8px;
+    font-family:'Poppins',sans-serif;
+
+}
+
+.team-card span{
+
+    color:#d32f2f;
+
+    font-weight:600;
+
+    display:block;
+
+    margin-bottom:15px;
+
+    font-family:'Poppins',sans-serif;
+
+}
+
+.team-card p{
+
+    color:#666;
+
+    font-size:15px;
+
+    line-height:1.7;
+
+    margin-bottom:20px;
+
+    font-family:'Poppins',sans-serif;
+
+}
+
+.team-social{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:18px;
+
+}
+
+.team-social a{
+
+    width:42px;
+
+    height:42px;
+
+    background:#f4f4f4;
+
+    border-radius:50%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    color:#d32f2f;
+
+    text-decoration:none;
+
+    transition:.3s;
+
+}
+
+.team-social a:hover{
+
+    background:#d32f2f;
+
+    color:#fff;
+
+}
+
+/* =========================
+          FOOTER
+========================= */
+
+.contact-footer{
+
+    background:#d32f2f;
+
+    color:#fff;
+
+    text-align:center;
+
+    padding:35px 20px;
+
+    margin-top:60px;
+
+}
+
+.contact-footer h3{
+
+    font-size:30px;
+
+    margin-bottom:10px;
+
+    font-family:'Poppins',sans-serif;
+
+}
+
+.contact-footer p{
+
+    margin:8px 0;
+
+    font-family:'Poppins',sans-serif;
+
+}
+
+.copyright{
+
+    margin-top:15px;
+
+    font-size:14px;
+
+    opacity:.9;
+
+}

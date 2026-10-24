@@ -1,0 +1,21 @@
+# Maven build output
+target/
+
+# Eclipse workspace and IDE files
+.settings/
+.metadata/
+.classpath
+.project
+
+# Compiled files and logs
+*.class
+*.log
+
+# Environment files and secrets
+.env
+.env.*
+!.env.example
+
+# Operating system files
+Thumbs.db
+.DS_Store

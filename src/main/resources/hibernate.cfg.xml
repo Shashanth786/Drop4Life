@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "https://hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+
+        <!-- Database settings are supplied by HibernateConfig.java -->
+        <property name="hibernate.dialect">
+            org.hibernate.dialect.MySQLDialect
+        </property>
+
+        <!-- SQL logging -->
+        <property name="hibernate.show_sql">true</property>
+        <property name="hibernate.format_sql">true</property>
+
+        <!-- Keep the existing schema-update behaviour -->
+        <property name="hibernate.hbm2ddl.auto">update</property>
+
+        <!-- Entity mappings -->
+        <mapping class="com.drop4life.model.User"/>
+        <mapping class="com.drop4life.model.Donor"/>
+        <mapping class="com.drop4life.model.BloodRequest"/>
+        <mapping class="com.drop4life.model.ContactMessage"/>
+
+    </session-factory>
+</hibernate-configuration>

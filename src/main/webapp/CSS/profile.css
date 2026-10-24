@@ -1,0 +1,831 @@
+/* =====================================================
+   DROP4LIFE - MY PROFILE
+   ===================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+    font-family: 'Poppins', sans-serif;
+
+    background: #f7f7f7;
+
+    color: #222;
+}
+
+
+/* =====================================================
+   NAVBAR
+   ===================================================== */
+
+.profile-navbar {
+
+    height: 75px;
+
+    width: 100%;
+
+    background: #ffffff;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 0 6%;
+
+    border-bottom: 1px solid #eeeeee;
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 1000;
+}
+
+
+.profile-logo {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    font-size: 23px;
+
+    font-weight: 800;
+
+    color: #111;
+}
+
+
+.profile-logo i {
+
+    color: #e60000;
+
+    font-size: 27px;
+}
+
+
+.profile-logo span span {
+
+    color: #e60000;
+}
+
+
+.dashboard-link {
+
+    text-decoration: none;
+
+    color: #333;
+
+    font-size: 14px;
+
+    font-weight: 500;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    transition: 0.3s;
+}
+
+
+.dashboard-link i {
+
+    color: #e60000;
+}
+
+
+.dashboard-link:hover {
+
+    color: #e60000;
+}
+
+
+/* =====================================================
+   MAIN
+   ===================================================== */
+
+.profile-container {
+
+    width: 90%;
+
+    max-width: 850px;
+
+    margin: 50px auto 70px;
+}
+
+
+/* =====================================================
+   HEADING
+   ===================================================== */
+
+.profile-heading {
+
+    text-align: center;
+
+    margin-bottom: 35px;
+}
+
+
+.profile-tag {
+
+    color: #e60000;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+}
+
+
+.profile-tag i {
+
+    margin-right: 5px;
+}
+
+
+.profile-heading h1 {
+
+    font-size: 42px;
+
+    font-weight: 800;
+
+    margin: 10px 0;
+}
+
+
+.profile-heading h1 span {
+
+    color: #e60000;
+}
+
+
+.profile-heading p {
+
+    color: #777;
+
+    font-size: 14px;
+}
+
+
+/* =====================================================
+   PROFILE CARD
+   ===================================================== */
+
+.profile-card {
+
+    background: #ffffff;
+
+    border-radius: 18px;
+
+    padding: 35px;
+
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.07);
+}
+
+
+/* =====================================================
+   ACCOUNT HEADER
+   ===================================================== */
+
+.account-header {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+
+    padding-bottom: 30px;
+
+    border-bottom: 1px solid #eeeeee;
+
+    margin-bottom: 30px;
+}
+
+
+.account-icon {
+
+    width: 65px;
+
+    height: 65px;
+
+    border-radius: 50%;
+
+    background: #fff0f0;
+
+    color: #e60000;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 25px;
+}
+
+
+.account-header h2 {
+
+    font-size: 21px;
+
+    font-weight: 700;
+
+    margin-bottom: 3px;
+}
+
+
+.account-header p {
+
+    color: #888;
+
+    font-size: 12px;
+
+    margin: 0;
+}
+
+
+/* =====================================================
+   SECTION TITLE
+   ===================================================== */
+
+.section-title {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    font-size: 17px;
+
+    font-weight: 700;
+
+    margin-bottom: 20px;
+}
+
+
+.section-title i {
+
+    color: #e60000;
+
+    font-size: 18px;
+}
+
+
+/* =====================================================
+   DETAILS GRID
+   ===================================================== */
+
+.details-grid {
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 15px;
+}
+
+
+.detail-box {
+
+    border: 1px solid #eeeeee;
+
+    border-radius: 10px;
+
+    padding: 16px 18px;
+
+    background: #fafafa;
+}
+
+
+.detail-box.full-width {
+
+    grid-column: span 2;
+}
+
+
+.detail-box span {
+
+    display: block;
+
+    color: #999;
+
+    font-size: 11px;
+
+    margin-bottom: 5px;
+}
+
+
+.detail-box strong {
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    color: #333;
+
+    word-break: break-word;
+}
+
+
+.detail-box .blood-group {
+
+    color: #e60000;
+
+    font-size: 17px;
+}
+
+
+/* =====================================================
+   ACTIONS
+   ===================================================== */
+
+.profile-actions {
+
+    display: flex;
+
+    gap: 12px;
+
+    margin-top: 30px;
+
+    padding-top: 25px;
+
+    border-top: 1px solid #eeeeee;
+}
+
+
+.profile-actions button {
+
+    flex: 1;
+
+    min-height: 45px;
+
+    border-radius: 9px;
+
+    font-family: 'Poppins', sans-serif;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+
+.edit-btn {
+
+    border: none;
+
+    background: #e60000;
+
+    color: #ffffff;
+}
+
+
+.edit-btn:hover {
+
+    background: #b80000;
+
+    transform: translateY(-1px);
+}
+
+
+.password-btn {
+
+    border: 1px solid #dddddd;
+
+    background: #ffffff;
+
+    color: #444;
+}
+
+
+.password-btn:hover {
+
+    background: #f5f5f5;
+}
+
+
+.logout-btn {
+
+    border: 1px solid #e60000;
+
+    background: #ffffff;
+
+    color: #e60000;
+}
+
+
+.logout-btn:hover {
+
+    background: #fff0f0;
+}
+
+
+.profile-actions i {
+
+    margin-right: 5px;
+}
+
+
+/* =====================================================
+   MODAL OVERLAY
+   ===================================================== */
+
+.modal-overlay {
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background: rgba(0, 0, 0, 0.55);
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px;
+
+    z-index: 2000;
+}
+
+
+.modal-overlay.show {
+
+    display: flex;
+}
+
+
+/* =====================================================
+   MODAL BOX
+   ===================================================== */
+
+.modal-box {
+
+    width: 100%;
+
+    max-width: 500px;
+
+    background: #ffffff;
+
+    border-radius: 16px;
+
+    padding: 30px;
+
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+
+    animation: modalOpen 0.2s ease;
+}
+
+
+@keyframes modalOpen {
+
+    from {
+
+        opacity: 0;
+
+        transform: translateY(-15px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: translateY(0);
+
+    }
+
+}
+
+
+/* =====================================================
+   MODAL HEADER
+   ===================================================== */
+
+.modal-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-start;
+
+    margin-bottom: 25px;
+}
+
+
+.modal-header h2 {
+
+    font-size: 22px;
+
+    margin-bottom: 4px;
+}
+
+
+.modal-header p {
+
+    color: #888;
+
+    font-size: 12px;
+
+    margin: 0;
+}
+
+
+.close-btn {
+
+    width: 35px;
+
+    height: 35px;
+
+    border: none;
+
+    background: #f5f5f5;
+
+    border-radius: 50%;
+
+    cursor: pointer;
+
+    color: #555;
+
+    font-size: 15px;
+
+    transition: 0.2s;
+}
+
+
+.close-btn:hover {
+
+    background: #ffecec;
+
+    color: #e60000;
+}
+
+
+/* =====================================================
+   FORM
+   ===================================================== */
+
+.form-group {
+
+    margin-bottom: 18px;
+}
+
+
+.form-group label {
+
+    display: block;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    margin-bottom: 7px;
+
+    color: #444;
+}
+
+
+.input-box {
+
+    position: relative;
+}
+
+
+.input-box i {
+
+    position: absolute;
+
+    left: 14px;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    color: #e60000;
+
+    font-size: 14px;
+}
+
+
+.input-box input {
+
+    width: 100%;
+
+    height: 46px;
+
+    border: 1px solid #dddddd;
+
+    border-radius: 9px;
+
+    outline: none;
+
+    padding: 0 14px 0 42px;
+
+    font-family: 'Poppins', sans-serif;
+
+    font-size: 13px;
+
+    transition: 0.2s;
+}
+
+
+.input-box input:focus {
+
+    border-color: #e60000;
+
+    box-shadow: 0 0 0 3px rgba(230, 0, 0, 0.08);
+}
+
+
+.input-box input:read-only {
+
+    background: #f5f5f5;
+
+    color: #888;
+
+    cursor: not-allowed;
+}
+
+
+.form-group small {
+
+    display: block;
+
+    color: #999;
+
+    font-size: 10px;
+
+    margin-top: 5px;
+}
+
+
+/* =====================================================
+   MODAL BUTTONS
+   ===================================================== */
+
+.modal-actions {
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 10px;
+
+    margin-top: 25px;
+}
+
+
+.modal-actions button {
+
+    border-radius: 8px;
+
+    padding: 11px 20px;
+
+    font-family: 'Poppins', sans-serif;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+
+.cancel-btn {
+
+    border: 1px solid #ddd;
+
+    background: #fff;
+
+    color: #555;
+}
+
+
+.cancel-btn:hover {
+
+    background: #f5f5f5;
+}
+
+
+.save-btn {
+
+    border: none;
+
+    background: #e60000;
+
+    color: #fff;
+}
+
+
+.save-btn:hover {
+
+    background: #b80000;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+
+@media (max-width: 700px) {
+
+    .profile-container {
+
+        width: 94%;
+
+        margin-top: 30px;
+    }
+
+
+    .profile-heading h1 {
+
+        font-size: 34px;
+    }
+
+
+    .profile-card {
+
+        padding: 25px 20px;
+    }
+
+
+    .details-grid {
+
+        grid-template-columns: 1fr;
+    }
+
+
+    .detail-box.full-width {
+
+        grid-column: span 1;
+    }
+
+
+    .profile-actions {
+
+        flex-direction: column;
+    }
+
+}
+
+
+@media (max-width: 500px) {
+
+    .profile-logo {
+
+        font-size: 20px;
+    }
+
+
+    .profile-logo i {
+
+        font-size: 23px;
+    }
+
+
+    .dashboard-link {
+
+        font-size: 12px;
+    }
+
+
+    .profile-heading h1 {
+
+        font-size: 30px;
+    }
+
+
+    .account-header h2 {
+
+        font-size: 18px;
+    }
+
+
+    .modal-box {
+
+        padding: 22px 18px;
+    }
+
+}

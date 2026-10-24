@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Drop4Life Login</title>
+
+    <link rel="stylesheet" href="CSS/navbar.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+
+    <style>
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #ffebee, #ffffff);
+        }
+
+        .login-card {
+            max-width: 420px;
+            width: 100%;
+            border: none;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .15);
+        }
+
+        .logo {
+            font-size: 40px;
+            color: #dc3545;
+        }
+
+        .btn-danger {
+            border-radius: 10px;
+        }
+
+        .form-control {
+            border-radius: 10px;
+            padding: 12px;
+        }
+
+        .form-control:focus {
+            border-color: #dc3545;
+            box-shadow: 0 0 0 .2rem rgba(220, 53, 69, .25);
+        }
+
+        .reset-status {
+            font-size: 13px;
+            margin-top: 10px;
+            overflow-wrap: anywhere;
+        }
+
+        .reset-status.error {
+            color: #b42332;
+        }
+
+        .reset-status.success {
+            color: #198754;
+        }
+
+        .reset-status.info {
+            color: #555;
+        }
+
+        .reset-step {
+            border-top: 1px solid #eee;
+            margin-top: 18px;
+            padding-top: 16px;
+        }
+
+        .reset-step[hidden] {
+            display: none !important;
+        }
+
+        .modal-footer {
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="drop-navbar">
+
+        <div class="drop-logo">
+            <i class="fa-solid fa-droplet"></i>
+            <span>DROP<span class="drop-four">4</span>LIFE</span>
+        </div>
+
+        <ul class="drop-nav-links">
+            <li>
+                <a href="index.html">
+                    <i class="fa-solid fa-house"></i> HOME
+                </a>
+            </li>
+
+            <li>
+                <a href="HTML/about.html">
+                    <i class="fa-solid fa-circle-info"></i> ABOUT US
+                </a>
+            </li>
+
+            <li>
+                <a href="HTML/donationprocess.html">
+                    <i class="fa-solid fa-stethoscope"></i>
+                    BLOOD DONATION PROCESS
+                </a>
+            </li>
+
+            <li>
+                <a href="HTML/contact.html">
+                    <i class="fa-solid fa-phone"></i> CONTACT US
+                </a>
+            </li>
+        </ul>
+
+        <div class="drop-nav-right">
+            <a href="login.html">
+                <button type="button" class="drop-login-btn">
+                    <b>Login</b>
+                </button>
+            </a>
+
+            <a href="signup.html">
+                <button type="button" class="drop-signup-btn">
+                    <b>Sign Up</b>
+                </button>
+            </a>
+        </div>
+
+    </nav>
+
+    <!-- Login Card -->
+    <div class="container d-flex justify-content-center align-items-center py-5"
+         style="min-height: 85vh;">
+
+        <div class="card login-card p-4">
+
+            <div class="text-center">
+                <div class="logo mb-2">
+                    <i class="fa-solid fa-droplet"></i>
+                    <span style="color:black;">Drop</span><span style="color:#dc3545;">4</span><span style="color:black;">Life</span>
+                </div>
+
+                <p class="text-muted mb-4">
+                    <b>Login to your account</b>
+                </p>
+            </div>
+
+            <div id="loginError"
+                 role="alert"
+                 style="color:red;text-align:center;margin-bottom:15px;font-weight:bold;">
+            </div>
+
+            <form id="loginForm" method="post">
+
+                <div class="mb-3">
+                    <label for="email" class="form-label">
+                        Email Address
+                    </label>
+
+                    <input type="email"
+                           id="email"
+                           name="email"
+                           class="form-control"
+                           placeholder="Enter your email"
+                           autocomplete="email"
+                           required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="phone" class="form-label">
+                        Phone
+                    </label>
+
+                    <input type="tel"
+                           id="phone"
+                           name="phone"
+                           class="form-control"
+                           placeholder="Enter your number"
+                           autocomplete="tel"
+                           required>
+                </div>
+
+                <div class="mb-4">
+                    <label for="password" class="form-label">
+                        Password
+                    </label>
+
+                    <input type="password"
+                           id="password"
+                           name="password"
+                           class="form-control"
+                           placeholder="Enter your password"
+                           autocomplete="current-password"
+                           required>
+                </div>
+
+                <div class="text-end mb-3">
+                    <a href="#"
+                       id="forgotPasswordLink"
+                       class="text-danger text-decoration-none"
+                       data-bs-toggle="modal"
+                       data-bs-target="#forgotPasswordModal">
+                        Forgot Password?
+                    </a>
+                </div>
+
+                <div class="d-grid">
+                    <button type="submit"
+                            class="btn btn-danger btn-lg">
+                        Login
+                    </button>
+                </div>
+
+                <div class="text-center mt-4">
+                    <p class="mb-0">
+                        Don't have an account?
+                        <a href="signup.html"
+                           class="text-danger text-decoration-none fw-semibold">
+                            Sign Up
+                        </a>
+                    </p>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <!-- Forgot Password Modal -->
+    <div class="modal fade"
+         id="forgotPasswordModal"
+         tabindex="-1"
+         aria-labelledby="forgotPasswordTitle"
+         aria-hidden="true">
+
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title" id="forgotPasswordTitle">
+                        Reset Password
+                    </h5>
+
+                    <button type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close">
+                    </button>
+                </div>
+
+                <div class="modal-body">
+
+                    <p class="text-muted small">
+                        Verify your registered email before resetting
+                        your password.
+                    </p>
+
+                    <!-- Email -->
+                    <div class="mb-3">
+                        <label for="forgotEmail" class="form-label">
+                            Registered Email Address
+                        </label>
+
+                        <input type="email"
+                               id="forgotEmail"
+                               class="form-control"
+                               placeholder="Enter your registered email"
+                               autocomplete="email"
+                               maxlength="150"
+                               required>
+                    </div>
+
+                    <button type="button"
+                            class="btn btn-warning w-100"
+                            id="sendOtp">
+                        Send Email OTP
+                    </button>
+
+                    <!-- OTP Verification -->
+                    <div class="reset-step" id="otpStep" hidden>
+
+                        <label for="otp" class="form-label">
+                            Six-digit OTP
+                        </label>
+
+                        <input type="text"
+                               id="otp"
+                               class="form-control"
+                               placeholder="Enter OTP"
+                               inputmode="numeric"
+                               pattern="[0-9]{6}"
+                               maxlength="6"
+                               autocomplete="one-time-code">
+
+                        <button type="button"
+                                class="btn btn-success w-100 mt-3"
+                                id="verifyOtp">
+                            Verify OTP
+                        </button>
+                    </div>
+
+                    <!-- New Password -->
+                    <div class="reset-step" id="passwordStep" hidden>
+
+                        <div class="mb-3">
+                            <label for="newPassword" class="form-label">
+                                New Password
+                            </label>
+
+                            <input type="password"
+                                   id="newPassword"
+                                   class="form-control"
+                                   placeholder="Enter new password"
+                                   autocomplete="new-password"
+                                   minlength="8">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="confirmNewPassword" class="form-label">
+                                Confirm New Password
+                            </label>
+
+                            <input type="password"
+                                   id="confirmNewPassword"
+                                   class="form-control"
+                                   placeholder="Confirm new password"
+                                   autocomplete="new-password"
+                                   minlength="8">
+                        </div>
+
+                        <button type="button"
+                                class="btn btn-danger w-100"
+                                id="resetPassword">
+                            Reset Password
+                        </button>
+                    </div>
+
+                    <div id="resetStatus"
+                         class="reset-status"
+                         role="status"
+                         aria-live="polite">
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button"
+                            class="btn btn-secondary"
+                            data-bs-dismiss="modal">
+                        Close
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Determine the application context path dynamically
+        var currentPath = window.location.pathname;
+        var loginSuffix = "/login.html";
+
+        var contextPath = currentPath.endsWith(loginSuffix)
+            ? currentPath.substring(
+                0, currentPath.length - loginSuffix.length
+              )
+            : "";
+
+        // Preserve the existing Spring MVC login endpoint
+        document.getElementById("loginForm").action =
+            contextPath + "/login";
+
+        // Display login errors returned by LoginController
+        var queryParams = new URLSearchParams(window.location.search);
+
+        if (queryParams.get("error") === "invalid") {
+            document.getElementById("loginError").textContent =
+                "Invalid email, phone number, or password.";
+        }
+
+        var emailInput = document.getElementById("forgotEmail");
+        var otpInput = document.getElementById("otp");
+        var newPasswordInput = document.getElementById("newPassword");
+        var confirmPasswordInput =
+            document.getElementById("confirmNewPassword");
+
+        var otpStep = document.getElementById("otpStep");
+        var passwordStep = document.getElementById("passwordStep");
+        var resetStatus = document.getElementById("resetStatus");
+
+        var sendOtpButton = document.getElementById("sendOtp");
+        var verifyOtpButton = document.getElementById("verifyOtp");
+        var resetPasswordButton = document.getElementById("resetPassword");
+
+        var otpVerified = false;
+
+        function showResetStatus(message, type) {
+            resetStatus.textContent = message;
+            resetStatus.className = "reset-status " + (type || "info");
+        }
+
+        async function readJsonResponse(response) {
+            var responseText = await response.text();
+
+            if (!responseText) {
+                return {};
+            }
+
+            try {
+                return JSON.parse(responseText);
+            } catch (error) {
+                return {};
+            }
+        }
+
+        async function sendJsonRequest(endpoint, data) {
+            var response = await fetch(contextPath + endpoint, {
+                method: "POST",
+                credentials: "same-origin",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+                body: JSON.stringify(data)
+            });
+
+            var result = await readJsonResponse(response);
+
+            if (!response.ok) {
+                throw new Error(
+                    result.detail ||
+                    result.message ||
+                    "The request failed. Please try again."
+                );
+            }
+
+            return result;
+        }
+
+        // Reset the steps if the email address changes
+        emailInput.addEventListener("input", function () {
+            otpVerified = false;
+            otpStep.hidden = true;
+            passwordStep.hidden = true;
+            otpInput.value = "";
+            newPasswordInput.value = "";
+            confirmPasswordInput.value = "";
+            showResetStatus("", "info");
+        });
+
+        // Step 1: Request an OTP by email
+        sendOtpButton.addEventListener("click", async function () {
+            var email = emailInput.value.trim();
+
+            if (!emailInput.checkValidity() || !email) {
+                emailInput.reportValidity();
+                return;
+            }
+
+            sendOtpButton.disabled = true;
+            sendOtpButton.textContent = "Sending OTP...";
+            showResetStatus("", "info");
+
+            try {
+                await sendJsonRequest(
+                    "/api/password-reset/send-otp",
+                    { email: email }
+                );
+
+                otpVerified = false;
+                otpStep.hidden = false;
+                passwordStep.hidden = true;
+
+                showResetStatus(
+                    "If the account is eligible, an OTP has been sent. Check your email.",
+                    "success"
+                );
+
+            } catch (error) {
+                showResetStatus(error.message, "error");
+
+            } finally {
+                sendOtpButton.disabled = false;
+                sendOtpButton.textContent = "Send Email OTP";
+            }
+        });
+
+        // Step 2: Verify the OTP
+        verifyOtpButton.addEventListener("click", async function () {
+            var email = emailInput.value.trim();
+            var otp = otpInput.value.trim();
+
+            if (!emailInput.checkValidity() || !email) {
+                emailInput.reportValidity();
+                return;
+            }
+
+            if (!/^[0-9]{6}$/.test(otp)) {
+                showResetStatus(
+                    "Enter the six-digit OTP sent to your email.",
+                    "error"
+                );
+                return;
+            }
+
+            verifyOtpButton.disabled = true;
+            verifyOtpButton.textContent = "Verifying...";
+
+            try {
+                await sendJsonRequest(
+                    "/api/password-reset/verify-otp",
+                    {
+                        email: email,
+                        otp: otp
+                    }
+                );
+
+                otpVerified = true;
+                passwordStep.hidden = false;
+
+                showResetStatus(
+                    "OTP verified. You can now choose a new password.",
+                    "success"
+                );
+
+            } catch (error) {
+                otpVerified = false;
+                passwordStep.hidden = true;
+                showResetStatus(error.message, "error");
+
+            } finally {
+                verifyOtpButton.disabled = false;
+                verifyOtpButton.textContent = "Verify OTP";
+            }
+        });
+
+        // Step 3: Save the new password after OTP verification
+        resetPasswordButton.addEventListener("click", async function () {
+            var email = emailInput.value.trim();
+            var newPassword = newPasswordInput.value;
+            var confirmPassword = confirmPasswordInput.value;
+
+            if (!otpVerified) {
+                showResetStatus(
+                    "Verify your OTP before resetting your password.",
+                    "error"
+                );
+                return;
+            }
+
+            if (newPassword.length < 8) {
+                showResetStatus(
+                    "Your new password must contain at least eight characters.",
+                    "error"
+                );
+                return;
+            }
+
+            if (newPassword !== confirmPassword) {
+                showResetStatus(
+                    "The passwords do not match.",
+                    "error"
+                );
+                return;
+            }
+
+            resetPasswordButton.disabled = true;
+            resetPasswordButton.textContent = "Resetting...";
+
+            try {
+                await sendJsonRequest(
+                    "/api/password-reset/reset",
+                    {
+                        email: email,
+                        newPassword: newPassword
+                    }
+                );
+
+                otpVerified = false;
+
+                showResetStatus(
+                    "Password reset successfully. Please log in with your new password.",
+                    "success"
+                );
+
+                document.getElementById("loginError").textContent = "";
+
+                newPasswordInput.value = "";
+                confirmPasswordInput.value = "";
+                otpInput.value = "";
+
+                window.setTimeout(function () {
+                    var modalElement =
+                        document.getElementById("forgotPasswordModal");
+
+                    var modal =
+                        bootstrap.Modal.getOrCreateInstance(modalElement);
+
+                    modal.hide();
+                }, 1800);
+
+            } catch (error) {
+                showResetStatus(error.message, "error");
+
+            } finally {
+                resetPasswordButton.disabled = false;
+                resetPasswordButton.textContent = "Reset Password";
+            }
+        });
+
+        // Clear reset state when the modal closes
+        document.getElementById("forgotPasswordModal")
+            .addEventListener("hidden.bs.modal", function () {
+                otpVerified = false;
+                emailInput.value = "";
+                otpInput.value = "";
+                newPasswordInput.value = "";
+                confirmPasswordInput.value = "";
+
+                otpStep.hidden = true;
+                passwordStep.hidden = true;
+
+                showResetStatus("", "info");
+
+                sendOtpButton.disabled = false;
+                sendOtpButton.textContent = "Send Email OTP";
+                verifyOtpButton.disabled = false;
+                verifyOtpButton.textContent = "Verify OTP";
+                resetPasswordButton.disabled = false;
+                resetPasswordButton.textContent = "Reset Password";
+            });
+    </script>
+
+</body>
+</html>

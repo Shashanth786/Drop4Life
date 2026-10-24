@@ -1,0 +1,202 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Register as a Blood Donor | Drop4Life</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <link rel="stylesheet" href="../CSS/donateblood.css">
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-inner">
+
+           
+<a href="a.jsp" class="logo" aria-label="Drop4Life Dashboard">
+    <i class="fa-solid fa-droplet logo-icon"></i>
+    <span class="logo-text">Drop<span class="logo-four">4</span>Life</span>
+</a>
+
+
+          
+<div class="nav-links">
+    <a href="a.jsp">
+        <i class="fa-solid fa-house"></i>
+        <span>Dashboard</span>
+    </a>
+
+    <a href="donors.html">
+        <i class="fa-solid fa-hand-holding-heart"></i>
+        <span>Donor Availability</span>
+    </a>
+
+    <a href="recipients.html">
+        <i class="fa-solid fa-droplet"></i>
+        <span>Blood Requests</span>
+    </a>
+</div>
+
+
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="donor-section">
+
+        <section class="donor-container">
+
+            <!-- Form Heading -->
+            <div class="form-heading">
+
+                <div class="blood-icon">
+                    <i class="fa-solid fa-hand-holding-droplet"></i>
+                </div>
+
+                <span class="eyebrow">BE SOMEONE'S LIFELINE</span>
+
+                <h1>Become a Blood Donor</h1>
+
+                <p>
+                    Your small act of kindness could make a life-changing
+                    difference. Register today and help people in your city.
+                </p>
+
+            </div>
+
+            <!-- Error Message -->
+            <div id="donorMessage"
+                 class="form-message error"
+                 role="alert"
+                 aria-live="polite"
+                 hidden>
+            </div>
+
+            <!-- Donor Registration Form -->
+            <form class="donor-form"
+                  action="/Drop4Life/registerDonor"
+                  method="post">
+
+                <div class="form-grid">
+
+                    <!-- Age -->
+                    <div class="form-group">
+
+                        <label for="age">Your Age</label>
+
+                        <div class="input-box">
+                            <i class="fa-solid fa-calendar-days"></i>
+
+                            <input
+                                type="number"
+                                id="age"
+                                name="age"
+                                placeholder="Enter your age"
+                                min="18"
+                                max="100"
+                                required>
+                        </div>
+
+                        <small class="field-hint">
+                            You must be at least 18 years old.
+                        </small>
+
+                    </div>
+
+                    <!-- City -->
+                    <div class="form-group">
+
+                        <label for="city">Your City</label>
+
+                        <div class="input-box">
+                            <i class="fa-solid fa-location-dot"></i>
+
+                            <input
+                                type="text"
+                                id="city"
+                                name="city"
+                                placeholder="Enter your city"
+                                maxlength="100"
+                                autocomplete="address-level2"
+                                required>
+                        </div>
+
+                        <small class="field-hint">
+                            Helps connect you with nearby requests.
+                        </small>
+
+                    </div>
+
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="register-btn">
+                    <span>Register as a Donor</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+
+                <p class="form-security">
+                    <i class="fa-solid fa-shield-heart"></i>
+                    Your registration uses your existing Drop4Life account.
+                </p>
+
+            </form>
+
+            <!-- Information Note -->
+            <div class="donor-note">
+                <div class="note-icon">
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+
+                <div>
+                    <h3>Every donor makes a difference</h3>
+                    <p>
+                        Your name, contact details, and blood group will come
+                        from your registered account. Your donor registration
+                        helps people looking for blood in your city.
+                    </p>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <p>
+            <span>&copy; 2026 Drop4Life.</span>
+            Every Drop Can Save a Life.
+        </p>
+    </footer>
+
+    <!-- Duplicate Registration Message -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const params = new URLSearchParams(window.location.search);
+            const error = params.get("error");
+            const message = document.getElementById("donorMessage");
+
+            if (error === "exists") {
+                message.textContent =
+                    "You are already registered as a donor. You cannot register again.";
+
+                message.hidden = false;
+            }
+
+        });
+    </script>
+
+</body>
+</html>
