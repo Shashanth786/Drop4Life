@@ -13,28 +13,39 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 public class HibernateConfig {
 
-    @Bean
-    public DataSource dataSource() {
+	@Bean
+	public DataSource dataSource() {
 
-        DriverManagerDataSource dataSource =
-                new DriverManagerDataSource();
+	    DriverManagerDataSource dataSource =
+	            new DriverManagerDataSource();
 
-        dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/drop4life");
-        dataSource.setUsername("root");
+	    dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
 
-     // Read the MySQL password from a Windows environment variable
-        String dbPassword = System.getenv("DROP4LIFE_DB_PASSWORD");
+	    String dbUrl = System.getenv("DROP4LIFE_DB_URL");
+	    String dbUsername = System.getenv("DROP4LIFE_DB_USERNAME");
+	    String dbPassword = System.getenv("DROP4LIFE_DB_PASSWORD");
 
-        if (dbPassword == null || dbPassword.isBlank()) {
-            throw new IllegalStateException(
-                    "MySQL password is missing. Set DROP4LIFE_DB_PASSWORD.");
-        }
+	    if (dbUrl == null || dbUrl.isBlank()) {
+	        throw new IllegalStateException(
+	                "Database URL is missing. Set DROP4LIFE_DB_URL.");
+	    }
 
-        dataSource.setPassword(dbPassword);
+	    if (dbUsername == null || dbUsername.isBlank()) {
+	        throw new IllegalStateException(
+	                "Database username is missing. Set DROP4LIFE_DB_USERNAME.");
+	    }
 
-        return dataSource;
-    }
+	    if (dbPassword == null || dbPassword.isBlank()) {
+	        throw new IllegalStateException(
+	                "Database password is missing. Set DROP4LIFE_DB_PASSWORD.");
+	    }
+
+	    dataSource.setUrl(dbUrl);
+	    dataSource.setUsername(dbUsername);
+	    dataSource.setPassword(dbPassword);
+
+	    return dataSource;
+	}
 
     @Bean
     public LocalSessionFactoryBean sessionFactory(DataSource dataSource) {
